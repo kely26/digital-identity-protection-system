@@ -15,6 +15,18 @@
 ![Reports](https://img.shields.io/badge/reports-JSON%20%2B%20HTML-f8b84a?style=flat-square&labelColor=0b1421&color=f8b84a)
 ![Demo Mode](https://img.shields.io/badge/demo-safe%20synthetic%20data-1aa9c2?style=flat-square&labelColor=0b1421&color=1aa9c2)
 
+<p align="center">
+  <a href="#quick-start"><strong>Quick Start</strong></a> ·
+  <a href="https://github.com/kely26/digital-identity-protection-system/releases/latest"><strong>Latest Release</strong></a> ·
+  <a href="examples/reports"><strong>Example Reports</strong></a> ·
+  <a href="#showcase-reel"><strong>Showcase Reel</strong></a> ·
+  <a href="#screenshots"><strong>Screenshots</strong></a>
+</p>
+
+<p align="center">
+  <img src="screenshots/github-social-preview.png" alt="DIPS product banner">
+</p>
+
 **Local-first identity security visibility for Windows and Linux.**
 
 DIPS is a defensive security tool for operators, privacy-conscious users, and engineers who want visibility into identity exposure, credential hygiene, local privacy leaks, risky browser posture, phishing indicators, threat intelligence matches, and cross-module risk patterns without depending on a cloud-first workflow.
@@ -60,6 +72,10 @@ It combines a production-style Python CLI, redacted JSON and HTML reports, a con
 - Extensible runtime model that separates built-in scanners, advanced modules, plugins, risk scoring, and reporting.
 - Portfolio-quality desktop UX with demo mode, screenshot-ready states, and SOC-style telemetry panels.
 - Contributor-friendly repo surface with focused docs, examples, templates, changelog structure, and release guidance.
+
+## Showcase Reel
+
+![DIPS showcase reel](screenshots/dips-showcase.gif)
 
 ## Screenshots
 
@@ -134,6 +150,8 @@ pip install -e .[gui]
 ```
 
 Full installation guidance is in [docs/installation.md](docs/installation.md).
+
+Packaged release notes and downloadable assets live at [Latest release](https://github.com/kely26/digital-identity-protection-system/releases/latest).
 
 ## Quick Start
 

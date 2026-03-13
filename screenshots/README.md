@@ -17,6 +17,8 @@ This folder stores the curated dashboard captures used in the README, documentat
 - `breach-exposure.png`
 - `threat-intelligence.png`
 - `reports.png`
+- `github-social-preview.png`: wide banner asset for GitHub previews, release notes, and portfolio sharing
+- `dips-showcase.gif`: lightweight animated showcase reel for the README hero area
 
 ## Recommended Placement
 
@@ -24,6 +26,8 @@ This folder stores the curated dashboard captures used in the README, documentat
 - dashboard feature sections: `severity-distribution.png`, `breach-exposure-alert.png`, `scan-report-view.png`
 - docs and release notes: `identity-exposure.png`, `threat-intelligence.png`
 - recruiter or portfolio callouts: `dashboard-overview.png`
+- social cards and launch posts: `github-social-preview.png`
+- README motion element: `dips-showcase.gif`
 
 ## One-Command Capture Workflow
 

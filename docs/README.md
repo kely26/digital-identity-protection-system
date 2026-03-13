@@ -21,6 +21,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 - [faq.md](faq.md): quick answers for evaluation, operations, privacy, and development questions
 - [releasing.md](releasing.md): release packaging workflow, versioning, build verification, and GitHub release checklist
 - [roadmap.md](roadmap.md): realistic future milestones for intelligence, analytics, enterprise workflows, and plugin growth
+- [releases/v0.1.0.md](releases/v0.1.0.md): public launch notes for the first release
 
 ## Engineering Guides
 
