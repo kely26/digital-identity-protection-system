@@ -3,15 +3,19 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 
 from dips import __version__
 from dips.core.config import dump_config, load_config
-from dips.core.exceptions import DipsError
+from dips.core.doctor import build_doctor_report, render_doctor_text
+from dips.core.exceptions import DipsError, HealthCheckError, PolicyViolationError
 from dips.demo_mode import DEFAULT_DEMO_OUTPUT_DIR, write_demo_reports
 from dips.core.engine import render_terminal_summary, run_scan, watch_scans
 from dips.core.logging import configure_logging
+from dips.core.models import SEVERITY_ORDER
+from dips.core.policy import evaluate_scan_policy
 
 
 def _error_text(prefix: str, exc: Exception) -> str:
@@ -73,6 +77,19 @@ def _add_logging_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--log-file", help="Optional path to a JSON log file.")
 
 
+def _add_policy_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--fail-on-severity",
+        choices=SEVERITY_ORDER,
+        help="Return a non-zero exit code when a finding meets or exceeds this severity.",
+    )
+    parser.add_argument(
+        "--fail-on-score",
+        type=int,
+        help="Return a non-zero exit code when the overall risk score meets or exceeds this value.",
+    )
+
+
 def _build_cli_overrides(args: argparse.Namespace) -> dict:
     overrides: dict = {}
     if getattr(args, "paths", None):
@@ -119,6 +136,7 @@ def build_parser() -> argparse.ArgumentParser:
     scan_parser = subparsers.add_parser("scan", help="Run a full identity protection scan.")
     _add_scope_args(scan_parser)
     _add_logging_args(scan_parser)
+    _add_policy_args(scan_parser)
 
     watch_parser = subparsers.add_parser("watch", help="Run repeated scans in the foreground.")
     _add_scope_args(watch_parser)
@@ -129,6 +147,17 @@ def build_parser() -> argparse.ArgumentParser:
     config_parser = subparsers.add_parser("show-config", help="Print the merged effective config.")
     _add_scope_args(config_parser)
     _add_logging_args(config_parser)
+
+    doctor_parser = subparsers.add_parser("doctor", help="Run runtime diagnostics and environment checks.")
+    _add_scope_args(doctor_parser)
+    _add_logging_args(doctor_parser)
+    doctor_parser.add_argument(
+        "--doctor-format",
+        choices=("text", "json"),
+        default="text",
+        dest="doctor_format",
+        help="Doctor output format.",
+    )
 
     gui_parser = subparsers.add_parser("gui", help="Launch the PySide6 desktop dashboard.")
     _add_dashboard_args(gui_parser)
@@ -162,6 +191,9 @@ def run_cli(argv: list[str] | None = None) -> int:
             log_file=getattr(args, "log_file", None),
         )
         config = load_config(getattr(args, "config", None), _build_cli_overrides(args))
+        if hasattr(args, "fail_on_score") and args.fail_on_score is not None:
+            if args.fail_on_score < 0 or args.fail_on_score > 100:
+                raise DipsError("--fail-on-score must be between 0 and 100.")
     except DipsError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return exc.exit_code
@@ -169,6 +201,14 @@ def run_cli(argv: list[str] | None = None) -> int:
     if args.command == "show-config":
         print(dump_config(config))
         return 0
+
+    if args.command == "doctor":
+        report = build_doctor_report(config)
+        if args.doctor_format == "json":
+            print(json.dumps(report.to_dict(), indent=2, sort_keys=True))
+        else:
+            print(render_doctor_text(report))
+        return 0 if report.overall_status != "fail" else HealthCheckError.exit_code
 
     if args.command == "demo":
         artifacts = write_demo_reports(args.output_dir)
@@ -235,6 +275,15 @@ def run_cli(argv: list[str] | None = None) -> int:
         if args.command == "scan":
             artifacts = run_scan(config, logger)
             print(render_terminal_summary(artifacts.report, artifacts.outputs))
+            violations = evaluate_scan_policy(
+                artifacts.report,
+                fail_on_severity=getattr(args, "fail_on_severity", None),
+                fail_on_score=getattr(args, "fail_on_score", None),
+            )
+            if violations:
+                for violation in violations:
+                    print(f"policy: {violation.message}", file=sys.stderr)
+                return PolicyViolationError.exit_code
             return 0
 
         if args.command == "watch":

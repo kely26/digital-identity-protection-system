@@ -37,3 +37,15 @@ class PluginError(DipsError):
     """Raised when plugin discovery, validation, or execution fails."""
 
     exit_code = 5
+
+
+class PolicyViolationError(DipsError):
+    """Raised when a completed scan violates an operator policy gate."""
+
+    exit_code = 6
+
+
+class HealthCheckError(DipsError):
+    """Raised when runtime diagnostics detect a hard environment failure."""
+
+    exit_code = 7

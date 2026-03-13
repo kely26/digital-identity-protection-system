@@ -73,6 +73,7 @@ Run DIPS locally:
 ```bash
 dips --help
 dips --version
+dips doctor
 dips scan --config config/example.config.json
 dips dashboard --demo
 ```
@@ -98,6 +99,11 @@ python -m compileall dips tests
 python -m build
 twine check dist/*
 ```
+
+GitHub Actions mirror:
+
+- [../.github/workflows/ci.yml](../.github/workflows/ci.yml) runs lint and tests on Ubuntu and Windows across Python `3.11` through `3.13`
+- the package-validation job builds the wheel and sdist and runs `twine check`
 
 Install from the built wheel in a fresh environment:
 
@@ -141,6 +147,7 @@ dips scan \
 - Add a dated release entry to `CHANGELOG.md`.
 - Confirm `README.md` screenshots and install steps are current.
 - Run `make release-check`.
+- Run `dips doctor`.
 - Run `dips scan --config config/example.config.json`.
 - Run `dips dashboard --demo`.
 - Verify demo reports, example config paths, and sample JSON files still load cleanly.

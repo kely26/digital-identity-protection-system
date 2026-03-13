@@ -11,6 +11,7 @@ Subcommands:
 - `scan`: run a full scan and write reports
 - `watch`: run repeated scans in the foreground
 - `show-config`: print the merged effective config
+- `doctor`: run runtime diagnostics and operator health checks
 - `gui`: launch the dashboard
 - `dashboard`: launch the dashboard
 - `demo`: generate safe synthetic demo reports
@@ -60,6 +61,18 @@ JSON-only output:
 dips scan --path ~/Documents --format json
 ```
 
+Policy-gated severity enforcement:
+
+```bash
+dips scan --path ~/Documents --fail-on-severity high
+```
+
+Policy-gated score enforcement:
+
+```bash
+dips scan --path ~/Documents --fail-on-score 70
+```
+
 ## Watch Command
 
 One-cycle smoke test:
@@ -89,6 +102,20 @@ dips show-config \
   --path ~/Documents \
   --identifier security.user@example.com \
   --breach-dataset tests/fixtures/breach/offline_dataset.json
+```
+
+## Doctor Command
+
+Run a runtime health check:
+
+```bash
+dips doctor
+```
+
+Emit JSON for support tooling or managed rollout automation:
+
+```bash
+dips doctor --doctor-format json
 ```
 
 ## Dashboard Command
@@ -163,5 +190,7 @@ dips demo --dashboard --page overview
 ## Exit Behavior
 
 - normal successful commands return `0`
+- `doctor` returns `7` when a hard environment failure is detected
+- policy-gated scans return `6` after reports are written when a configured threshold is violated
 - config and validation errors return a DIPS-specific non-zero exit code
 - unexpected failures are converted into clean CLI error messages instead of raw tracebacks

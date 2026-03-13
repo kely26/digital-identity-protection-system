@@ -1,4 +1,4 @@
-.PHONY: clean test lint build release-check smoke dashboard
+.PHONY: clean test lint build release-check smoke dashboard doctor
 
 clean:
 	rm -rf build dist *.egg-info
@@ -20,3 +20,6 @@ smoke:
 
 dashboard:
 	python3 -m dips.ui_dashboard
+
+doctor:
+	python3 -m dips doctor

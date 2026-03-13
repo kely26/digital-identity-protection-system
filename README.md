@@ -7,6 +7,7 @@
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-22bfd8?style=flat-square&labelColor=0b1421&color=22bfd8)
 ![License](https://img.shields.io/github/license/kely26/digital-identity-protection-system?style=flat-square&labelColor=0b1421&color=f8b84a)
 ![Verification](https://img.shields.io/badge/verification-local%20QA%20passed-35d1a3?style=flat-square&labelColor=0b1421&color=35d1a3)
+![Beta](https://img.shields.io/badge/release-open%20beta-54c7ff?style=flat-square&labelColor=0b1421&color=54c7ff)
 ![Test Coverage](https://img.shields.io/badge/coverage-CLI%20%7C%20modules%20%7C%20dashboard-1aa9c2?style=flat-square&labelColor=0b1421&color=1aa9c2)
 ![Security Focused](https://img.shields.io/badge/security-defensive%20%7C%20local--first-ff5d78?style=flat-square&labelColor=0b1421&color=ff5d78)
 ![Windows](https://img.shields.io/badge/windows-supported-35d1a3?style=flat-square&labelColor=0b1421&color=35d1a3)
@@ -27,13 +28,35 @@
   <img src="screenshots/github-social-preview.png" alt="DIPS product banner">
 </p>
 
+<table>
+<tr>
+<td valign="top">
+
 **Local-first identity security visibility for Windows and Linux.**
 
 DIPS is a defensive security tool for operators, privacy-conscious users, and engineers who want visibility into identity exposure, credential hygiene, local privacy leaks, risky browser posture, phishing indicators, threat intelligence matches, and cross-module risk patterns without depending on a cloud-first workflow.
 
 It combines a production-style Python CLI, redacted JSON and HTML reports, a configurable Digital Identity Risk Score, a PySide6 desktop dashboard, a persistent security timeline, and a plugin system for external security modules.
 
+</td>
+<td valign="top" width="340">
+  <img src="screenshots/repo-typing-analyst.gif" alt="Animated SOC analyst typing at a workstation" width="320">
+</td>
+</tr>
+</table>
+
 > Defensive-only. DIPS does not exploit systems, weaponize findings, or decrypt protected browser vaults.
+
+## Beta Access
+
+DIPS is ready for a free early-access beta with stable core workflows and support-oriented diagnostics.
+
+Recommended beta workflow:
+
+- run `dips doctor` before the first scan
+- use `dips scan` normally for everyday evaluation
+- include redacted `dips doctor --doctor-format json` output when filing issues
+- use [beta feedback](.github/ISSUE_TEMPLATE/beta_feedback.md) or the normal bug template for support
 
 ## Project Snapshot
 
@@ -62,6 +85,8 @@ It combines a production-style Python CLI, redacted JSON and HTML reports, a con
 - AI Security Analysis for plain-language summaries, risk explanations, suspicious-pattern detection, and remediation advice.
 - Security Event Timeline and alert correlation across modules and across repeated scans.
 - JSON and HTML reporting designed for both automation and analyst review.
+- Runtime diagnostics with `dips doctor` for operator support and beta rollout verification.
+- Policy-gated scan exits for automation workflows and managed-service enforcement.
 - Premium PySide6 dashboard with SOC-style panels, scan history, trend charts, severity heatmaps, and report loading.
 - Plugin System for external scanners, enrichment hooks, report extensions, and local tool integrations.
 
@@ -187,6 +212,29 @@ dips dashboard --load-report reports/<scan-id>.json
 
 The full operator quick start is in [docs/quickstart.md](docs/quickstart.md).
 
+## Operational Readiness
+
+Run the built-in environment diagnostics:
+
+```bash
+dips doctor
+```
+
+Get JSON diagnostics for support or managed rollouts:
+
+```bash
+dips doctor --doctor-format json
+```
+
+Use DIPS as an automation gate without changing the default scan workflow:
+
+```bash
+dips scan --path ~/Documents --fail-on-severity high
+dips scan --path ~/Documents --fail-on-score 70
+```
+
+Operational guidance is in [docs/operations.md](docs/operations.md).
+
 ## Demo Mode
 
 DIPS includes a safe synthetic demo mode for screenshots, GitHub presentation, and dashboard walkthroughs.
@@ -253,6 +301,7 @@ Core commands:
 - `dips scan` runs one full defensive scan and writes reports.
 - `dips watch` performs repeated foreground scans and shows new or resolved findings.
 - `dips show-config` prints the merged effective configuration.
+- `dips doctor` validates runtime health, writability, configured inputs, and plugin loading.
 - `dips dashboard` launches the PySide6 desktop interface.
 
 Examples:

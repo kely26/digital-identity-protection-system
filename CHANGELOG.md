@@ -6,11 +6,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-03-13
+
 ### Added
-- Release packaging guidance and maintainer release workflow documentation.
+- `dips doctor` runtime diagnostics for operator support, beta rollout validation, and environment health checks.
+- Policy-gated scan exit behavior with `--fail-on-severity` and `--fail-on-score` for automation workflows.
+- A GitHub Actions CI workflow for Linux and Windows validation plus package metadata checks.
+- Operations documentation for beta support, CI expectations, and managed rollout patterns.
+- A README-side animated typing analyst asset for a more polished GitHub presentation.
+- A beta feedback issue template for structured early-user reports.
 
 ### Changed
-- Packaging metadata, release bootstrap dependencies, and release verification targets.
+- Release verification guidance now includes runtime diagnostics as part of the maintainer baseline.
+- The repository presentation now positions DIPS more clearly for free beta distribution and support triage.
 
 ## [0.1.0] - 2026-03-13
 

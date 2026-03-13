@@ -42,6 +42,64 @@ def test_scan_command_generates_reports(tmp_path, monkeypatch):
     assert list(output_dir.glob("*.html"))
 
 
+def test_scan_command_fail_on_severity_returns_policy_exit_code(tmp_path, monkeypatch, capsys):
+    profile = tmp_path / "profile"
+    profile.mkdir()
+    monkeypatch.setenv("HOME", str(profile))
+    monkeypatch.setenv("USERPROFILE", str(profile))
+
+    exposure_dir = tmp_path / "scan-target"
+    exposure_dir.mkdir()
+    shutil.copy(Path(__file__).parent / "fixtures" / "exposure" / "leaky.env", exposure_dir / "leaky.env")
+    output_dir = tmp_path / "reports"
+
+    exit_code = run_cli(
+        [
+            "scan",
+            "--path",
+            str(exposure_dir),
+            "--output-dir",
+            str(output_dir),
+            "--fail-on-severity",
+            "high",
+        ]
+    )
+    captured = capsys.readouterr()
+
+    assert exit_code == 6
+    assert "policy: Detected" in captured.err
+    assert list(output_dir.glob("*.json"))
+
+
+def test_scan_command_fail_on_score_returns_policy_exit_code(tmp_path, monkeypatch, capsys):
+    profile = tmp_path / "profile"
+    profile.mkdir()
+    monkeypatch.setenv("HOME", str(profile))
+    monkeypatch.setenv("USERPROFILE", str(profile))
+
+    exposure_dir = tmp_path / "scan-target"
+    exposure_dir.mkdir()
+    shutil.copy(Path(__file__).parent / "fixtures" / "exposure" / "leaky.env", exposure_dir / "leaky.env")
+    output_dir = tmp_path / "reports"
+
+    exit_code = run_cli(
+        [
+            "scan",
+            "--path",
+            str(exposure_dir),
+            "--output-dir",
+            str(output_dir),
+            "--fail-on-score",
+            "50",
+        ]
+    )
+    captured = capsys.readouterr()
+
+    assert exit_code == 6
+    assert "Overall risk score" in captured.err
+    assert list(output_dir.glob("*.json"))
+
+
 def test_scan_command_accepts_windows_style_paths_on_posix(tmp_path, monkeypatch):
     profile = tmp_path / "profile"
     docs = profile / "Documents"
@@ -129,6 +187,31 @@ def test_show_config_accepts_threat_feed_overrides(capsys):
     assert exit_code == 0
     assert str(feed) in captured.out
     assert '"allow_online": true' in captured.out
+
+
+def test_doctor_command_reports_runtime_health(tmp_path, capsys):
+    output_dir = tmp_path / "reports"
+
+    exit_code = run_cli(["doctor", "--output-dir", str(output_dir)])
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "DIPS Doctor" in captured.out
+    assert "Overall Status" in captured.out
+    assert "report_output_dir" in captured.out
+
+
+def test_doctor_command_supports_json_output(tmp_path, capsys):
+    output_dir = tmp_path / "reports"
+
+    exit_code = run_cli(["doctor", "--output-dir", str(output_dir), "--doctor-format", "json"])
+    captured = capsys.readouterr()
+
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload["overall_status"] in {"pass", "warn"}
+    assert any(check["name"] == "report_output_dir" for check in payload["checks"])
 
 
 def test_watch_command_runs_single_cycle(tmp_path, monkeypatch):

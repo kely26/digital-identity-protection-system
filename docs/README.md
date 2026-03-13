@@ -14,6 +14,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 - [installation.md](installation.md): Linux and Windows setup, runtime-only install, and environment verification
 - [quickstart.md](quickstart.md): first scan, report review, and dashboard launch in a few minutes
 - [cli.md](cli.md): command reference and common workflows
+- [operations.md](operations.md): runtime diagnostics, CI, policy-gated scans, and beta support workflow
 - [gui.md](gui.md): desktop dashboard usage, pages, screenshots, and troubleshooting
 - [reports.md](reports.md): JSON and HTML report structure and usage
 - [security-philosophy.md](security-philosophy.md): privacy model, defensive scope, sensitive-data handling, and reporting philosophy
@@ -21,6 +22,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 - [faq.md](faq.md): quick answers for evaluation, operations, privacy, and development questions
 - [releasing.md](releasing.md): release packaging workflow, versioning, build verification, and GitHub release checklist
 - [roadmap.md](roadmap.md): realistic future milestones for intelligence, analytics, enterprise workflows, and plugin growth
+- [releases/v0.1.1.md](releases/v0.1.1.md): diagnostics, policy-gating, CI restoration, and beta-readiness release notes
 - [releases/v0.1.0.md](releases/v0.1.0.md): public launch notes for the first release
 
 ## Engineering Guides
@@ -28,6 +30,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 - [architecture.md](architecture.md): runtime design, data flow, repository structure, and major components
 - [architecture-diagram.mmd](architecture-diagram.mmd): Mermaid source for the system architecture diagram used in the README and docs
 - [features.md](features.md): module-by-module feature breakdown and operational intent
+- [operations.md](operations.md): support-oriented runtime checks, CI expectations, and product-style workflows
 - [plugins.md](plugins.md): plugin architecture, validation, configuration, and example layout
 - [module-development.md](module-development.md): scanner authoring guidance and test expectations
 - [project-profile.md](project-profile.md): GitHub presentation guidance, recruiter framing, and public project positioning
