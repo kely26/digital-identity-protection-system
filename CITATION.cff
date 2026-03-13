@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use DIPS in research, demos, or derivative work, please cite the project."
+title: "DIPS | Digital Identity Protection System"
+version: "0.1.0"
+type: software
+authors:
+  - family-names: "Hackloi"
+    given-names: "Hackloi"
+repository-code: "https://github.com/kely26/digital-identity-protection-system"
+license: "MIT"
+abstract: "Local-first identity security visibility for Windows and Linux."
+keywords:
+  - cybersecurity
+  - privacy
+  - phishing
+  - threat-intelligence
+  - identity-security
+  - desktop-security

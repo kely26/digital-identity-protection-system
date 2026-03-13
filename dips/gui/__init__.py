@@ -1,0 +1,2 @@
+"""Desktop dashboard for DIPS."""
+

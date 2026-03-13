@@ -1,0 +1,556 @@
+{
+  "config": {
+    "demo_mode": {
+      "enabled": true,
+      "safe_synthetic_data": true,
+      "scenario": "escalation"
+    },
+    "reporting": {
+      "redact_evidence": false
+    }
+  },
+  "duration_ms": 11340,
+  "extensions": {},
+  "finished_at": "2026-03-12T14:20:11+00:00",
+  "hostname": "demo-workstation",
+  "modules": [
+    {
+      "description": "Escalating exposure state.",
+      "duration_ms": 460,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "file_name": "github-sync.txt",
+            "sample": "demo_github_token_red"
+          },
+          "id": "7ff8bde9a4d0",
+          "location": "~/Workspace/notes/github-sync.txt",
+          "module": "identity_exposure",
+          "recommendation": "Rotate the exposed token and remove plaintext sync exports from the workstation.",
+          "severity": "high",
+          "summary": "A staging token was exported into a note-taking workspace sync file.",
+          "tags": [
+            "token",
+            "secret"
+          ],
+          "title": "GitHub token pattern detected"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "email_count": 82,
+            "file_name": "partner-identities.csv"
+          },
+          "id": "a1aa59c92dd0",
+          "location": "~/Workspace/exports/partner-identities.csv",
+          "module": "identity_exposure",
+          "recommendation": "Move the file into approved storage and reduce local plaintext copies.",
+          "severity": "medium",
+          "summary": "A spreadsheet of partner identities is stored outside protected project storage.",
+          "tags": [
+            "identity",
+            "email"
+          ],
+          "title": "Plaintext email address collection detected"
+        }
+      ],
+      "metadata": {
+        "scanned_files": 27
+      },
+      "module": "identity_exposure",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating breach intelligence state.",
+      "duration_ms": 190,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "breach_count": 3,
+            "identifier": "finance.ops@example.com",
+            "identifier_hash": "demo-escalation-c3d4",
+            "identifier_type": "email",
+            "sources": [
+              "credential_leak",
+              "forum_dump",
+              "breach_archive_2024"
+            ]
+          },
+          "id": "dbc8a71e7194",
+          "location": "finance.ops@example.com",
+          "module": "breach_intelligence",
+          "recommendation": "Force password rotation for the affected identity group and require MFA re-enrollment.",
+          "severity": "medium",
+          "summary": "finance.ops@example.com appears in multiple synthetic credential leak collections used in the demo.",
+          "tags": [
+            "breach",
+            "identity",
+            "email"
+          ],
+          "title": "Identity exposure detected in breach intelligence"
+        }
+      ],
+      "metadata": {
+        "identifiers_scanned": 3,
+        "identifiers_with_hits": 1,
+        "offline_dataset_count": 2
+      },
+      "module": "breach_intelligence",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating credential hygiene state.",
+      "duration_ms": 150,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "count": 3
+          },
+          "id": "c13a50c2ac32",
+          "location": "credential_inputs",
+          "module": "credential_hygiene",
+          "recommendation": "Separate the password set immediately and enable MFA on all internet-facing services.",
+          "severity": "high",
+          "summary": "Three staged business services share the same password candidate.",
+          "tags": [
+            "password",
+            "reuse"
+          ],
+          "title": "Password reuse detected"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "length": 8
+          },
+          "id": "acb02fc44c4e",
+          "location": "credential_inputs",
+          "module": "credential_hygiene",
+          "recommendation": "Replace the short password with a longer passphrase.",
+          "severity": "medium",
+          "summary": "A demo account password is materially shorter than the team baseline.",
+          "tags": [
+            "password",
+            "length"
+          ],
+          "title": "Short password detected"
+        }
+      ],
+      "metadata": {
+        "password_count": 8,
+        "unique_passwords": 6
+      },
+      "module": "credential_hygiene",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating privacy risk state.",
+      "duration_ms": 250,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "file_name": "id_ed25519"
+          },
+          "id": "36f5c854cb2c",
+          "location": "~/Workspace/ssh-backups/id_ed25519",
+          "module": "privacy_risk",
+          "recommendation": "Restrict the file permissions and remove the backup from shared local storage.",
+          "severity": "medium",
+          "summary": "An SSH private key backup is accessible to a broad local group on the workstation.",
+          "tags": [
+            "private-key",
+            "privacy"
+          ],
+          "title": "Sensitive file has broad permissions"
+        }
+      ],
+      "metadata": {
+        "artifact_count": 4
+      },
+      "module": "privacy_risk",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating browser posture state.",
+      "duration_ms": 320,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "browser": "Edge",
+            "profile": "Default"
+          },
+          "id": "e0524bc2a3de",
+          "location": "Edge/Default",
+          "module": "browser_audit",
+          "recommendation": "Re-enable browser protection controls and review why they were disabled.",
+          "severity": "medium",
+          "summary": "Safe browsing protections are disabled in the primary browser profile.",
+          "tags": [
+            "browser",
+            "protection"
+          ],
+          "title": "Disabled browser protection setting detected"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "browser": "Edge",
+            "profile": "Default"
+          },
+          "id": "34c8ae44cc05",
+          "location": "Edge/Default",
+          "module": "browser_audit",
+          "recommendation": "Move credential storage to a managed password manager and clear local browser logins.",
+          "severity": "medium",
+          "summary": "Saved business credentials remain available in the primary profile.",
+          "tags": [
+            "browser",
+            "credential"
+          ],
+          "title": "Saved logins present in browser profile"
+        }
+      ],
+      "metadata": {
+        "extensions_seen": 14,
+        "profiles": 2
+      },
+      "module": "browser_audit",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating phishing state.",
+      "duration_ms": 170,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "from": "invoices@trusted-example.example",
+            "reply_to": "settlement@outlook-gateway.example"
+          },
+          "id": "f92586324c29",
+          "location": "invoice-review.eml",
+          "module": "email_phishing",
+          "recommendation": "Report the sender, block the message, and warn the targeted finance group.",
+          "severity": "medium",
+          "summary": "A staged invoice email uses a mismatched reply address designed to redirect the conversation.",
+          "tags": [
+            "email",
+            "phishing",
+            "header"
+          ],
+          "title": "Reply-To mismatch detected in email headers"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "urls": [
+              "https://docs-review-login.example/portal"
+            ]
+          },
+          "id": "34c7a4536eb4",
+          "location": "invoice-review.eml",
+          "module": "email_phishing",
+          "recommendation": "Do not visit the URL and block the destination in mail or web controls.",
+          "severity": "medium",
+          "summary": "The email links to a fake document portal with urgency language.",
+          "tags": [
+            "email",
+            "url",
+            "phishing"
+          ],
+          "title": "Suspicious URLs detected in email body"
+        }
+      ],
+      "metadata": {
+        "emails_scanned": 1
+      },
+      "module": "email_phishing",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating threat intelligence state.",
+      "duration_ms": 130,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "confidence": 0.89,
+            "indicator": "https://docs-review-login.example/portal",
+            "indicator_type": "url",
+            "reputation": "malicious",
+            "sources": [
+              "malicious_url_feed",
+              "phish-tracker"
+            ]
+          },
+          "id": "3f1aebef956f",
+          "location": "invoice-review.eml",
+          "module": "threat_intelligence",
+          "recommendation": "Block the destination URL and investigate whether any users interacted with it.",
+          "severity": "medium",
+          "summary": "The invoice review URL is present in a malicious URL collection.",
+          "tags": [
+            "threat-intel",
+            "url",
+            "malicious",
+            "phishing"
+          ],
+          "title": "Threat intelligence match for url"
+        }
+      ],
+      "metadata": {
+        "indicators_enriched": 2,
+        "indicators_scanned": 5
+      },
+      "module": "threat_intelligence",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Escalating AI analysis state.",
+      "duration_ms": 96,
+      "findings": [],
+      "metadata": {
+        "analysis_mode": "demo-synthetic",
+        "findings_reviewed": 11,
+        "recommended_actions": [
+          "Block the malicious invoice URL and notify the finance team.",
+          "Force-reset reused or breached credentials and verify MFA coverage.",
+          "Re-enable disabled browser protections and remove stored business logins."
+        ],
+        "risk_explanation": "The environment now shows both valid attack vectors and accessible identity material, increasing the likelihood of account takeover and business-email compromise.",
+        "summary": "The demo posture has shifted from manageable hygiene gaps into an active identity-risk scenario with phishing, malicious infrastructure, and repeated credential weakness.",
+        "suspicious_patterns": [
+          {
+            "related_findings": [
+              "f92586324c29",
+              "34c7a4536eb4",
+              "3f1aebef956f"
+            ],
+            "severity": "high",
+            "summary": "The message design and the linked infrastructure point to a staged account-harvesting workflow.",
+            "title": "Phishing pressure aligns with malicious infrastructure"
+          },
+          {
+            "related_findings": [
+              "dbc8a71e7194",
+              "c13a50c2ac32"
+            ],
+            "severity": "high",
+            "summary": "Breach hits and password reuse indicate that password spray or credential stuffing would likely succeed.",
+            "title": "Exposed identity set has viable follow-on abuse paths"
+          }
+        ]
+      },
+      "module": "ai_security_analysis",
+      "status": "completed",
+      "warnings": []
+    }
+  ],
+  "notes": [
+    "Demo mode generated synthetic findings. No live scan was executed.",
+    "This staged report is designed for dashboard screenshots and walkthroughs."
+  ],
+  "platform_name": "linux",
+  "scan_id": "demo-escalation-002",
+  "started_at": "2026-03-12T14:20:00+00:00",
+  "summary": {
+    "category_scores": {
+      "breach_exposure": 15,
+      "browser_risk": 12,
+      "credential_reuse": 10,
+      "password_strength": 6,
+      "phishing_risk": 19,
+      "token_exposure": 16
+    },
+    "contributing_findings": [
+      "credential_hygiene: Password reuse detected",
+      "identity_exposure: GitHub token pattern detected",
+      "breach_intelligence: Identity exposure detected in breach intelligence",
+      "identity_exposure: Plaintext email address collection detected",
+      "threat_intelligence: Threat intelligence match for url",
+      "browser_audit: Disabled browser protection setting detected"
+    ],
+    "module_scores": {
+      "ai_security_analysis": 0,
+      "breach_intelligence": 8,
+      "browser_audit": 12,
+      "credential_hygiene": 16,
+      "email_phishing": 12,
+      "identity_exposure": 17,
+      "privacy_risk": 6,
+      "threat_intelligence": 7
+    },
+    "overall_label": "high",
+    "overall_score": 78,
+    "risk_model": "digital_identity_weighted_sum",
+    "severity_counts": {
+      "high": 2,
+      "medium": 9
+    },
+    "top_recommendations": [
+      "Rotate the exposed token and remove plaintext sync exports from the workstation.",
+      "Separate the password set immediately and enable MFA on all internet-facing services.",
+      "Force password rotation for the affected identity group and require MFA re-enrollment.",
+      "Block the destination URL and investigate whether any users interacted with it.",
+      "Move the file into approved storage and reduce local plaintext copies.",
+      "Do not visit the URL and block the destination in mail or web controls."
+    ]
+  },
+  "target_paths": [
+    "/home/demo-operator/Workspace",
+    "/home/demo-operator/InboxExports"
+  ],
+  "timeline": {
+    "events": [
+      {
+        "correlations": [
+          "Exposed identity set has viable follow-on abuse paths"
+        ],
+        "event_type": "token_exposure",
+        "id": "demo-e1",
+        "location": "~/Workspace/notes/github-sync.txt",
+        "module": "identity_exposure",
+        "related_findings": [
+          "7ff8bde9a4d0"
+        ],
+        "scan_id": "demo-escalation-002",
+        "severity": "high",
+        "summary": "A token export was found in synced notes.",
+        "tags": [
+          "token"
+        ],
+        "timestamp": "2026-03-12T14:21:00+00:00",
+        "title": "GitHub token pattern detected"
+      },
+      {
+        "correlations": [
+          "Exposed identity set has viable follow-on abuse paths"
+        ],
+        "event_type": "credential_reuse",
+        "id": "demo-e2",
+        "location": "credential_inputs",
+        "module": "credential_hygiene",
+        "related_findings": [
+          "c13a50c2ac32"
+        ],
+        "scan_id": "demo-escalation-002",
+        "severity": "high",
+        "summary": "Three services share a password.",
+        "tags": [
+          "reuse"
+        ],
+        "timestamp": "2026-03-12T14:23:00+00:00",
+        "title": "Password reuse detected"
+      },
+      {
+        "correlations": [
+          "Exposed identity set has viable follow-on abuse paths"
+        ],
+        "event_type": "breach_exposure",
+        "id": "demo-e3",
+        "location": "finance.ops@example.com",
+        "module": "breach_intelligence",
+        "related_findings": [
+          "dbc8a71e7194"
+        ],
+        "scan_id": "demo-escalation-002",
+        "severity": "medium",
+        "summary": "The finance mailbox appears across three breach sources.",
+        "tags": [
+          "breach"
+        ],
+        "timestamp": "2026-03-12T14:25:00+00:00",
+        "title": "Identity exposure detected in breach intelligence"
+      },
+      {
+        "correlations": [
+          "Phishing pressure aligns with malicious infrastructure"
+        ],
+        "event_type": "phishing_analysis",
+        "id": "demo-e4",
+        "location": "invoice-review.eml",
+        "module": "email_phishing",
+        "related_findings": [
+          "f92586324c29"
+        ],
+        "scan_id": "demo-escalation-002",
+        "severity": "medium",
+        "summary": "The invoice lure redirects the reply channel.",
+        "tags": [
+          "phishing"
+        ],
+        "timestamp": "2026-03-12T14:27:00+00:00",
+        "title": "Reply-To mismatch detected in email headers"
+      },
+      {
+        "correlations": [
+          "Phishing pressure aligns with malicious infrastructure"
+        ],
+        "event_type": "threat_intelligence",
+        "id": "demo-e5",
+        "location": "invoice-review.eml",
+        "module": "threat_intelligence",
+        "related_findings": [
+          "3f1aebef956f"
+        ],
+        "scan_id": "demo-escalation-002",
+        "severity": "medium",
+        "summary": "The linked invoice portal is malicious.",
+        "tags": [
+          "malicious",
+          "url"
+        ],
+        "timestamp": "2026-03-12T14:29:00+00:00",
+        "title": "Threat intelligence match for url"
+      }
+    ],
+    "patterns": [
+      {
+        "event_ids": [
+          "demo-e4",
+          "demo-e5"
+        ],
+        "id": "demo-pattern-e1",
+        "modules": [
+          "email_phishing",
+          "threat_intelligence"
+        ],
+        "name": "Phishing pressure aligns with malicious infrastructure",
+        "severity": "high",
+        "summary": "A business-email compromise lure now overlaps with a malicious destination URL."
+      },
+      {
+        "event_ids": [
+          "demo-e1",
+          "demo-e2",
+          "demo-e3"
+        ],
+        "id": "demo-pattern-e2",
+        "modules": [
+          "identity_exposure",
+          "credential_hygiene",
+          "breach_intelligence"
+        ],
+        "name": "Exposed identity set has viable follow-on abuse paths",
+        "severity": "high",
+        "summary": "Breach exposure, token leakage, and password reuse create a credible takeover chain."
+      }
+    ],
+    "store_path": "examples/demo-reports/demo-event-timeline.json",
+    "total_events": 5
+  },
+  "user_profile": "/home/demo-operator",
+  "username": "demo-operator"
+}

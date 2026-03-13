@@ -1,0 +1,491 @@
+{
+  "config": {
+    "demo_mode": {
+      "enabled": true,
+      "safe_synthetic_data": true,
+      "scenario": "baseline"
+    },
+    "reporting": {
+      "redact_evidence": false
+    }
+  },
+  "duration_ms": 8120,
+  "extensions": {},
+  "finished_at": "2026-03-12T12:25:08+00:00",
+  "hostname": "demo-workstation",
+  "modules": [
+    {
+      "description": "Demo exposure analysis for exported identities and tokens.",
+      "duration_ms": 420,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "email_count": 34,
+            "file_name": "contact-rollup.csv"
+          },
+          "id": "6c6bb53671a9",
+          "location": "~/Workspace/exports/contact-rollup.csv",
+          "module": "identity_exposure",
+          "recommendation": "Move the export into controlled storage and remove plaintext copies from the workstation.",
+          "severity": "medium",
+          "summary": "A local campaign planning export contains a plain business contact list.",
+          "tags": [
+            "identity",
+            "email"
+          ],
+          "title": "Plaintext email address collection detected"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "file_name": "session-notes.txt",
+            "sample": "demo_session_token_blue"
+          },
+          "id": "f2ab750e2ed3",
+          "location": "~/Workspace/notes/session-notes.txt",
+          "module": "identity_exposure",
+          "recommendation": "Rotate the affected session or API token and remove plaintext notes exports.",
+          "severity": "medium",
+          "summary": "A notes export contains a reusable session artifact that should not live in plaintext storage.",
+          "tags": [
+            "token",
+            "secret"
+          ],
+          "title": "Session token artifact detected in analyst notes"
+        }
+      ],
+      "metadata": {
+        "exposure_findings": 2,
+        "scanned_files": 18
+      },
+      "module": "identity_exposure",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo breach intelligence matching.",
+      "duration_ms": 180,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "breach_count": 1,
+            "identifier": "finance.ops@example.com",
+            "identifier_hash": "demo-baseline-a1b2",
+            "identifier_type": "email",
+            "sources": [
+              "breach_archive_2023"
+            ]
+          },
+          "id": "cb095402193e",
+          "location": "finance.ops@example.com",
+          "module": "breach_intelligence",
+          "recommendation": "Rotate related credentials and add MFA to the identity set used in public-facing services.",
+          "severity": "low",
+          "summary": "finance.ops@example.com appears in one offline breach archive used for the demo scenario.",
+          "tags": [
+            "breach",
+            "identity",
+            "email"
+          ],
+          "title": "Identity exposure detected in breach intelligence"
+        }
+      ],
+      "metadata": {
+        "identifiers_scanned": 2,
+        "identifiers_with_hits": 1,
+        "offline_dataset_count": 1
+      },
+      "module": "breach_intelligence",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo credential hygiene assessment.",
+      "duration_ms": 140,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "password_alias": "campaign-portal"
+          },
+          "id": "3dd22fcb7f85",
+          "location": "credential_inputs",
+          "module": "credential_hygiene",
+          "recommendation": "Replace the reused secret with a unique passphrase generated for this account set.",
+          "severity": "medium",
+          "summary": "A staged credential candidate matches a common-password blocklist entry.",
+          "tags": [
+            "password",
+            "common"
+          ],
+          "title": "Common password detected"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "accounts": [
+              "campaign-portal",
+              "vendor-portal"
+            ],
+            "count": 2
+          },
+          "id": "2ef2f9a4f921",
+          "location": "credential_inputs",
+          "module": "credential_hygiene",
+          "recommendation": "Assign unique passwords to each service account and enforce MFA where supported.",
+          "severity": "medium",
+          "summary": "Two demo service accounts share the same password candidate.",
+          "tags": [
+            "password",
+            "reuse"
+          ],
+          "title": "Password reuse detected"
+        }
+      ],
+      "metadata": {
+        "password_count": 6,
+        "unique_passwords": 5
+      },
+      "module": "credential_hygiene",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo local privacy artifact review.",
+      "duration_ms": 220,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "file_name": "browser-passwords.csv"
+          },
+          "id": "04e153ac7316",
+          "location": "~/Workspace/browser-export/browser-passwords.csv",
+          "module": "privacy_risk",
+          "recommendation": "Delete the export and move any required secrets into a managed vault.",
+          "severity": "low",
+          "summary": "A local browser export bundle includes remembered account details in an unprotected folder.",
+          "tags": [
+            "privacy",
+            "credential-store"
+          ],
+          "title": "Credential store artifact detected"
+        }
+      ],
+      "metadata": {
+        "artifact_count": 3
+      },
+      "module": "privacy_risk",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo browser posture audit.",
+      "duration_ms": 310,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "browser": "Chrome",
+            "profile": "Profile 1"
+          },
+          "id": "f7d47dc827dc",
+          "location": "Chrome/Profile 1",
+          "module": "browser_audit",
+          "recommendation": "Disable local password storage and move credentials into a managed password manager.",
+          "severity": "low",
+          "summary": "The primary Chromium profile stores saved logins for multiple business services.",
+          "tags": [
+            "browser",
+            "credential"
+          ],
+          "title": "Saved logins present in browser profile"
+        },
+        {
+          "confidence": "high",
+          "evidence": {
+            "browser": "Chrome",
+            "profile": "Profile 1"
+          },
+          "id": "81927615c58a",
+          "location": "Chrome/Profile 1",
+          "module": "browser_audit",
+          "recommendation": "Enable password leak detection and monitor for reused credentials.",
+          "severity": "low",
+          "summary": "Password leak detection is disabled in the main browser profile.",
+          "tags": [
+            "browser",
+            "protection"
+          ],
+          "title": "Leak detection protection disabled"
+        }
+      ],
+      "metadata": {
+        "extensions_seen": 11,
+        "profiles": 2
+      },
+      "module": "browser_audit",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo phishing analysis.",
+      "duration_ms": 160,
+      "findings": [
+        {
+          "confidence": "high",
+          "evidence": {
+            "sender": "billing@example-mail.example",
+            "urls": [
+              "https://vendor-security-check.example/login"
+            ]
+          },
+          "id": "5f2a66d7e9f0",
+          "location": "vendor-warning.eml",
+          "module": "email_phishing",
+          "recommendation": "Do not open the message, block the sender, and brief the affected user group.",
+          "severity": "low",
+          "summary": "A vendor-themed email references a deceptive login URL with account pressure wording.",
+          "tags": [
+            "email",
+            "url",
+            "phishing"
+          ],
+          "title": "Suspicious URLs detected in email body"
+        }
+      ],
+      "metadata": {
+        "emails_scanned": 1
+      },
+      "module": "email_phishing",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo threat intelligence enrichment.",
+      "duration_ms": 110,
+      "findings": [
+        {
+          "confidence": "medium",
+          "evidence": {
+            "confidence": 0.61,
+            "indicator": "vendor-security-check.example",
+            "indicator_type": "domain",
+            "reputation": "suspicious",
+            "sources": [
+              "brand-monitor-feed"
+            ]
+          },
+          "id": "106e74ec3145",
+          "location": "vendor-warning.eml",
+          "module": "threat_intelligence",
+          "recommendation": "Review the destination domain before allowing it through mail or web controls.",
+          "severity": "low",
+          "summary": "The domain in the staged email appears in a suspicious-domain feed used for the demo.",
+          "tags": [
+            "threat-intel",
+            "domain",
+            "suspicious",
+            "phishing"
+          ],
+          "title": "Threat intelligence match for domain"
+        }
+      ],
+      "metadata": {
+        "indicators_enriched": 1,
+        "indicators_scanned": 4
+      },
+      "module": "threat_intelligence",
+      "status": "completed",
+      "warnings": []
+    },
+    {
+      "description": "Demo AI risk explanation layer.",
+      "duration_ms": 90,
+      "findings": [],
+      "metadata": {
+        "analysis_mode": "demo-synthetic",
+        "findings_reviewed": 9,
+        "recommended_actions": [
+          "Replace reused credentials and enable MFA on exposed services.",
+          "Remove plaintext token notes and browser password exports from local storage.",
+          "Block the staged phishing domain and notify impacted users."
+        ],
+        "risk_explanation": "The exposure set is still containable, but password reuse and browser-stored credentials lower the effort required for account takeover.",
+        "summary": "DIPS demo mode shows early identity leakage, weak credential hygiene, and emerging phishing pressure with limited but credible exposure.",
+        "suspicious_patterns": [
+          {
+            "related_findings": [
+              "2ef2f9a4f921",
+              "cb095402193e"
+            ],
+            "severity": "medium",
+            "summary": "A reused credential appears alongside a breach hit, increasing the chance of credential stuffing.",
+            "title": "Password reuse overlaps with early breach exposure"
+          }
+        ]
+      },
+      "module": "ai_security_analysis",
+      "status": "completed",
+      "warnings": []
+    }
+  ],
+  "notes": [
+    "Demo mode generated synthetic findings. No live scan was executed.",
+    "All domains, identities, and tokens in this report are staged examples."
+  ],
+  "platform_name": "linux",
+  "scan_id": "demo-baseline-001",
+  "started_at": "2026-03-12T12:25:00+00:00",
+  "summary": {
+    "category_scores": {
+      "breach_exposure": 11,
+      "browser_risk": 6,
+      "credential_reuse": 6,
+      "password_strength": 6,
+      "phishing_risk": 6,
+      "privacy_risk": 3,
+      "token_exposure": 6
+    },
+    "contributing_findings": [
+      "identity_exposure: Plaintext email address collection detected",
+      "credential_hygiene: Common password detected",
+      "credential_hygiene: Password reuse detected",
+      "identity_exposure: Session token artifact detected in analyst notes",
+      "breach_intelligence: Identity exposure detected in breach intelligence",
+      "browser_audit: Leak detection protection disabled"
+    ],
+    "module_scores": {
+      "ai_security_analysis": 0,
+      "breach_intelligence": 4,
+      "browser_audit": 6,
+      "credential_hygiene": 12,
+      "email_phishing": 3,
+      "identity_exposure": 13,
+      "privacy_risk": 3,
+      "threat_intelligence": 3
+    },
+    "overall_label": "moderate",
+    "overall_score": 44,
+    "risk_model": "digital_identity_weighted_sum",
+    "severity_counts": {
+      "low": 6,
+      "medium": 4
+    },
+    "top_recommendations": [
+      "Move the export into controlled storage and remove plaintext copies from the workstation.",
+      "Assign unique passwords to each service account and enforce MFA where supported.",
+      "Replace the reused secret with a unique passphrase generated for this account set.",
+      "Rotate the affected session or API token and remove plaintext notes exports.",
+      "Rotate related credentials and add MFA to the identity set used in public-facing services.",
+      "Delete the export and move any required secrets into a managed vault."
+    ]
+  },
+  "target_paths": [
+    "/home/demo-operator/Workspace",
+    "/home/demo-operator/Downloads"
+  ],
+  "timeline": {
+    "events": [
+      {
+        "correlations": [
+          "Password reuse overlaps with early breach exposure"
+        ],
+        "event_type": "credential_reuse",
+        "id": "demo-b1",
+        "location": "credential_inputs",
+        "module": "credential_hygiene",
+        "related_findings": [
+          "2ef2f9a4f921"
+        ],
+        "scan_id": "demo-baseline-001",
+        "severity": "high",
+        "summary": "Two service accounts share the same secret.",
+        "tags": [
+          "reuse"
+        ],
+        "timestamp": "2026-03-12T12:26:00+00:00",
+        "title": "Password reuse detected"
+      },
+      {
+        "correlations": [
+          "Password reuse overlaps with early breach exposure"
+        ],
+        "event_type": "breach_exposure",
+        "id": "demo-b2",
+        "location": "finance.ops@example.com",
+        "module": "breach_intelligence",
+        "related_findings": [
+          "cb095402193e"
+        ],
+        "scan_id": "demo-baseline-001",
+        "severity": "low",
+        "summary": "An operational mailbox appears in one breach archive.",
+        "tags": [
+          "breach"
+        ],
+        "timestamp": "2026-03-12T12:28:00+00:00",
+        "title": "Identity exposure detected in breach intelligence"
+      },
+      {
+        "correlations": [],
+        "event_type": "phishing_analysis",
+        "id": "demo-b3",
+        "location": "vendor-warning.eml",
+        "module": "email_phishing",
+        "related_findings": [
+          "5f2a66d7e9f0"
+        ],
+        "scan_id": "demo-baseline-001",
+        "severity": "low",
+        "summary": "The staged vendor email contains a deceptive link.",
+        "tags": [
+          "phishing"
+        ],
+        "timestamp": "2026-03-12T12:30:00+00:00",
+        "title": "Suspicious URLs detected in email body"
+      },
+      {
+        "correlations": [],
+        "event_type": "threat_intelligence",
+        "id": "demo-b4",
+        "location": "vendor-warning.eml",
+        "module": "threat_intelligence",
+        "related_findings": [
+          "106e74ec3145"
+        ],
+        "scan_id": "demo-baseline-001",
+        "severity": "low",
+        "summary": "The linked domain is already tagged as suspicious.",
+        "tags": [
+          "domain",
+          "suspicious"
+        ],
+        "timestamp": "2026-03-12T12:32:00+00:00",
+        "title": "Threat intelligence match for domain"
+      }
+    ],
+    "patterns": [
+      {
+        "event_ids": [
+          "demo-b1",
+          "demo-b2"
+        ],
+        "id": "demo-pattern-b1",
+        "modules": [
+          "credential_hygiene",
+          "breach_intelligence"
+        ],
+        "name": "Password reuse overlaps with early breach exposure",
+        "severity": "medium",
+        "summary": "Credential hygiene and breach history combine into a credible account-takeover path."
+      }
+    ],
+    "store_path": "examples/demo-reports/demo-event-timeline.json",
+    "total_events": 4
+  },
+  "user_profile": "/home/demo-operator",
+  "username": "demo-operator"
+}

@@ -1,0 +1,3 @@
+# Contributor bootstrap: installs the editable package plus desktop and QA extras.
+# Version constraints live in pyproject.toml so package metadata and bootstrap stay aligned.
+-e .[dev,gui,release]

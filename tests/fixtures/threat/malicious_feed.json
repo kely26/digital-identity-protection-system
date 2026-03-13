@@ -1,0 +1,23 @@
+[
+  {
+    "indicator": "http://192.168.1.10/login",
+    "type": "url",
+    "reputation": "malicious",
+    "confidence": 0.97,
+    "source": "threat_feed_1"
+  },
+  {
+    "indicator": "192.168.1.10",
+    "type": "ip",
+    "reputation": "suspicious",
+    "confidence": 0.74,
+    "source": "ioc_database"
+  },
+  {
+    "indicator": "xn--microsft-3ya.example",
+    "type": "domain",
+    "reputation": "malicious",
+    "confidence": 0.93,
+    "source": "ioc_database"
+  }
+]

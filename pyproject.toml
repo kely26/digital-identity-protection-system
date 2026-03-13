@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-identity-protection-system"
+dynamic = ["version"]
+description = "Local-first defensive CLI for digital identity risk detection on Windows and Linux."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  {name = "Hackloi"}
+]
+maintainers = [
+  {name = "Hackloi"}
+]
+keywords = ["cybersecurity", "privacy", "identity-protection", "defensive-security", "cli", "windows", "linux"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Environment :: X11 Applications :: Qt",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: System :: Systems Administration"
+]
+
+[project.scripts]
+dips = "dips.cli.main:run_cli"
+dips-dashboard = "dips.ui_dashboard.main_dashboard:main"
+
+[project.optional-dependencies]
+gui = [
+  "PySide6>=6.8.0,<7",
+]
+dev = [
+  "pytest>=9.0.0,<10",
+  "ruff>=0.11.0,<1"
+]
+release = [
+  "build>=1.2.2,<2",
+  "twine>=6.1.0,<7"
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "dips.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dips*"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

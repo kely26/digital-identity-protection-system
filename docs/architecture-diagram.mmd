@@ -1,0 +1,68 @@
+flowchart LR
+    subgraph UX["Operator Surfaces"]
+        CLI["CLI Interface
+scan | watch | show-config | demo"]
+        UI["Dashboard UI
+PySide6 desktop"]
+    end
+
+    subgraph CORE["Core Runtime"]
+        CFG["Validated Config
+paths | modules | privacy | reporting"]
+        ENGINE["Scan Engine
+context build | orchestration | scheduling"]
+        TIMELINE["Event Timeline
+event collection | correlation | history"]
+        SCORE["Risk Scoring Engine
+Digital Identity Risk Score"]
+        REPORT["Reporting Engine
+JSON | HTML | dashboard payloads"]
+    end
+
+    subgraph ANALYSIS["Analysis and Enrichment"]
+        SCANNERS["Scanner Modules
+identity exposure | credential hygiene | privacy risk | browser audit | phishing"]
+        BREACH["Breach Intelligence
+hashed identifier lookup | offline datasets | provider hooks"]
+        THREAT["Threat Intelligence
+IOC parsing | reputation lookup | provider hooks"]
+        PLUGINS["Plugin System
+external scanners | enrichment | report extensions"]
+    end
+
+    CACHE["Local Data Cache
+breach cache | threat cache | event store"]
+    OUTPUTS["Report Outputs
+terminal summary | JSON | HTML | dashboard views"]
+
+    CLI --> CFG
+    UI --> CFG
+    CFG --> ENGINE
+    CLI --> ENGINE
+    UI --> ENGINE
+
+    ENGINE --> SCANNERS
+    ENGINE --> BREACH
+    ENGINE --> THREAT
+    ENGINE --> PLUGINS
+
+    SCANNERS --> TIMELINE
+    BREACH --> TIMELINE
+    THREAT --> TIMELINE
+    PLUGINS --> TIMELINE
+
+    SCANNERS --> SCORE
+    BREACH --> SCORE
+    THREAT --> SCORE
+    PLUGINS --> SCORE
+    TIMELINE --> SCORE
+
+    SCORE --> REPORT
+    TIMELINE --> REPORT
+    REPORT --> OUTPUTS
+    OUTPUTS --> UI
+    OUTPUTS --> CLI
+
+    BREACH <--> CACHE
+    THREAT <--> CACHE
+    TIMELINE <--> CACHE

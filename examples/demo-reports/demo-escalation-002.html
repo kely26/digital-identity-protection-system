@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DIPS Report demo-escalation-002</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0b1020; color: #e5e7eb; margin: 0; padding: 24px; }
+    h1, h2, h3 { margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0 24px; }
+    .card { background: #131a2d; border: 1px solid #22304e; border-radius: 12px; padding: 16px; }
+    .pill { border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: bold; }
+    .sev-info { background: #1f3b64; }
+    .sev-low { background: #14532d; }
+    .sev-medium { background: #854d0e; }
+    .sev-high { background: #9a3412; }
+    .sev-critical { background: #991b1b; }
+    table { width: 100%; border-collapse: collapse; background: #131a2d; border-radius: 12px; overflow: hidden; }
+    th, td { border-bottom: 1px solid #22304e; text-align: left; padding: 12px; vertical-align: top; }
+    th { background: #172036; }
+    ul { padding-left: 20px; }
+    .score { font-size: 42px; font-weight: 700; }
+    .muted { color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <h1>Digital Identity Protection System</h1>
+  <p class="muted">Scan ID demo-escalation-002 · Platform linux · User demo-operator</p>
+  <div class="grid">
+    <div class="card"><h3>Overall Score</h3><div class="score">78</div><p>high</p></div>
+    <div class="card"><h3>Risk Model</h3><p>digital_identity_weighted_sum</p><h3>Duration</h3><p>11340 ms</p></div>
+    <div class="card"><h3>Started</h3><p>2026-03-12T14:20:00+00:00</p><h3>Finished</h3><p>2026-03-12T14:20:11+00:00</p></div>
+    <div class="card"><h3>Target Paths</h3><ul><li>/home/demo-operator/Workspace</li><li>/home/demo-operator/InboxExports</li></ul></div>
+  </div>
+  <h2>Module Breakdown</h2>
+  <div class="grid"><div class='card'><h3>identity_exposure</h3><p>Status: completed</p><p>Findings: 2</p><p>Warnings: 0</p><p>Risk Score: 17</p></div><div class='card'><h3>breach_intelligence</h3><p>Status: completed</p><p>Findings: 1</p><p>Warnings: 0</p><p>Risk Score: 8</p></div><div class='card'><h3>credential_hygiene</h3><p>Status: completed</p><p>Findings: 2</p><p>Warnings: 0</p><p>Risk Score: 16</p></div><div class='card'><h3>privacy_risk</h3><p>Status: completed</p><p>Findings: 1</p><p>Warnings: 0</p><p>Risk Score: 6</p></div><div class='card'><h3>browser_audit</h3><p>Status: completed</p><p>Findings: 2</p><p>Warnings: 0</p><p>Risk Score: 12</p></div><div class='card'><h3>email_phishing</h3><p>Status: completed</p><p>Findings: 2</p><p>Warnings: 0</p><p>Risk Score: 12</p></div><div class='card'><h3>threat_intelligence</h3><p>Status: completed</p><p>Findings: 1</p><p>Warnings: 0</p><p>Risk Score: 7</p></div><div class='card'><h3>ai_security_analysis</h3><p>Status: completed</p><p>Findings: 0</p><p>Warnings: 0</p><p>Risk Score: 0</p></div></div>
+  <h2>Risk Categories</h2>
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Score</th></tr>
+    </thead>
+    <tbody><tr><td>Phishing Risk</td><td>19</td></tr><tr><td>Token Exposure</td><td>16</td></tr><tr><td>Breach Exposure</td><td>15</td></tr><tr><td>Browser Risk</td><td>12</td></tr><tr><td>Credential Reuse</td><td>10</td></tr><tr><td>Password Strength</td><td>6</td></tr></tbody>
+  </table>
+  <h2>Top Recommendations</h2>
+  <div class="card"><ul><li>Rotate the exposed token and remove plaintext sync exports from the workstation.</li><li>Separate the password set immediately and enable MFA on all internet-facing services.</li><li>Force password rotation for the affected identity group and require MFA re-enrollment.</li><li>Block the destination URL and investigate whether any users interacted with it.</li><li>Move the file into approved storage and reduce local plaintext copies.</li><li>Do not visit the URL and block the destination in mail or web controls.</li></ul></div>
+  <h2>Top Risk Drivers</h2>
+  <div class="card"><ul><li>credential_hygiene: Password reuse detected</li><li>identity_exposure: GitHub token pattern detected</li><li>breach_intelligence: Identity exposure detected in breach intelligence</li><li>identity_exposure: Plaintext email address collection detected</li><li>threat_intelligence: Threat intelligence match for url</li><li>browser_audit: Disabled browser protection setting detected</li></ul></div>
+  <h2>AI Security Analysis</h2><div class='grid'><div class='card'><h3>Security Summary</h3><p>The demo posture has shifted from manageable hygiene gaps into an active identity-risk scenario with phishing, malicious infrastructure, and repeated credential weakness.</p></div><div class='card'><h3>Risk Explanation</h3><p>The environment now shows both valid attack vectors and accessible identity material, increasing the likelihood of account takeover and business-email compromise.</p></div><div class='card'><h3>Recommended Actions</h3><ul><li>Block the malicious invoice URL and notify the finance team.</li><li>Force-reset reused or breached credentials and verify MFA coverage.</li><li>Re-enable disabled browser protections and remove stored business logins.</li></ul></div><div class='card'><h3>Suspicious Patterns</h3><ul><li><strong>Phishing pressure aligns with malicious infrastructure</strong>: The message design and the linked infrastructure point to a staged account-harvesting workflow.</li><li><strong>Exposed identity set has viable follow-on abuse paths</strong>: Breach hits and password reuse indicate that password spray or credential stuffing would likely succeed.</li></ul></div></div>
+  
+  <h2>Security Timeline</h2>
+  <table>
+    <thead>
+      <tr><th>Time</th><th>Severity</th><th>Event</th><th>Module</th></tr>
+    </thead>
+    <tbody><tr><td>14:21</td><td><span class='pill sev-high'>high</span></td><td>GitHub token pattern detected</td><td>identity_exposure</td></tr><tr><td>14:23</td><td><span class='pill sev-high'>high</span></td><td>Password reuse detected</td><td>credential_hygiene</td></tr><tr><td>14:25</td><td><span class='pill sev-medium'>medium</span></td><td>Identity exposure detected in breach intelligence</td><td>breach_intelligence</td></tr><tr><td>14:27</td><td><span class='pill sev-medium'>medium</span></td><td>Reply-To mismatch detected in email headers</td><td>email_phishing</td></tr><tr><td>14:29</td><td><span class='pill sev-medium'>medium</span></td><td>Threat intelligence match for url</td><td>threat_intelligence</td></tr></tbody>
+  </table>
+  <h2>Correlated Patterns</h2>
+  <div class="card"><ul><li><strong>Phishing pressure aligns with malicious infrastructure</strong>: A business-email compromise lure now overlaps with a malicious destination URL.</li><li><strong>Exposed identity set has viable follow-on abuse paths</strong>: Breach exposure, token leakage, and password reuse create a credible takeover chain.</li></ul></div>
+  <h2>Findings</h2>
+  <table>
+    <thead>
+      <tr><th>Module</th><th>Severity</th><th>Title</th><th>Location</th><th>Summary</th><th>Evidence</th><th>Tags</th></tr>
+    </thead>
+    <tbody><tr><td>identity_exposure</td><td><span class='pill sev-high'>high</span></td><td>GitHub token pattern detected</td><td>~/Workspace/notes/github-sync.txt</td><td>A staging token was exported into a note-taking workspace sync file.</td><td>{&quot;file_name&quot;: &quot;github-sync.txt&quot;, &quot;sample&quot;: &quot;demo_github_token_red&quot;}</td><td>token, secret</td></tr><tr><td>identity_exposure</td><td><span class='pill sev-medium'>medium</span></td><td>Plaintext email address collection detected</td><td>~/Workspace/exports/partner-identities.csv</td><td>A spreadsheet of partner identities is stored outside protected project storage.</td><td>{&quot;email_count&quot;: 82, &quot;file_name&quot;: &quot;partner-identities.csv&quot;}</td><td>identity, email</td></tr><tr><td>breach_intelligence</td><td><span class='pill sev-medium'>medium</span></td><td>Identity exposure detected in breach intelligence</td><td>finance.ops@example.com</td><td>finance.ops@example.com appears in multiple synthetic credential leak collections used in the demo.</td><td>{&quot;breach_count&quot;: 3, &quot;identifier&quot;: &quot;finance.ops@example.com&quot;, &quot;identifier_hash&quot;: &quot;demo-escalation-c3d4&quot;, &quot;identifier_type&quot;: &quot;email&quot;, &quot;sources&quot;: [&quot;credential_leak&quot;, &quot;forum_dump&quot;, &quot;breach_archive_2024&quot;]}</td><td>breach, identity, email</td></tr><tr><td>credential_hygiene</td><td><span class='pill sev-high'>high</span></td><td>Password reuse detected</td><td>credential_inputs</td><td>Three staged business services share the same password candidate.</td><td>{&quot;count&quot;: 3}</td><td>password, reuse</td></tr><tr><td>credential_hygiene</td><td><span class='pill sev-medium'>medium</span></td><td>Short password detected</td><td>credential_inputs</td><td>A demo account password is materially shorter than the team baseline.</td><td>{&quot;length&quot;: 8}</td><td>password, length</td></tr><tr><td>privacy_risk</td><td><span class='pill sev-medium'>medium</span></td><td>Sensitive file has broad permissions</td><td>~/Workspace/ssh-backups/id_ed25519</td><td>An SSH private key backup is accessible to a broad local group on the workstation.</td><td>{&quot;file_name&quot;: &quot;id_ed25519&quot;}</td><td>private-key, privacy</td></tr><tr><td>browser_audit</td><td><span class='pill sev-medium'>medium</span></td><td>Disabled browser protection setting detected</td><td>Edge/Default</td><td>Safe browsing protections are disabled in the primary browser profile.</td><td>{&quot;browser&quot;: &quot;Edge&quot;, &quot;profile&quot;: &quot;Default&quot;}</td><td>browser, protection</td></tr><tr><td>browser_audit</td><td><span class='pill sev-medium'>medium</span></td><td>Saved logins present in browser profile</td><td>Edge/Default</td><td>Saved business credentials remain available in the primary profile.</td><td>{&quot;browser&quot;: &quot;Edge&quot;, &quot;profile&quot;: &quot;Default&quot;}</td><td>browser, credential</td></tr><tr><td>email_phishing</td><td><span class='pill sev-medium'>medium</span></td><td>Reply-To mismatch detected in email headers</td><td>invoice-review.eml</td><td>A staged invoice email uses a mismatched reply address designed to redirect the conversation.</td><td>{&quot;from&quot;: &quot;invoices@trusted-example.example&quot;, &quot;reply_to&quot;: &quot;settlement@outlook-gateway.example&quot;}</td><td>email, phishing, header</td></tr><tr><td>email_phishing</td><td><span class='pill sev-medium'>medium</span></td><td>Suspicious URLs detected in email body</td><td>invoice-review.eml</td><td>The email links to a fake document portal with urgency language.</td><td>{&quot;urls&quot;: [&quot;https://docs-review-login.example/portal&quot;]}</td><td>email, url, phishing</td></tr><tr><td>threat_intelligence</td><td><span class='pill sev-medium'>medium</span></td><td>Threat intelligence match for url</td><td>invoice-review.eml</td><td>The invoice review URL is present in a malicious URL collection.</td><td>{&quot;confidence&quot;: 0.89, &quot;indicator&quot;: &quot;https://docs-review-login.example/portal&quot;, &quot;indicator_type&quot;: &quot;url&quot;, &quot;reputation&quot;: &quot;malicious&quot;, &quot;sources&quot;: [&quot;malicious_url_feed&quot;, &quot;phish-tracker&quot;]}</td><td>threat-intel, url, malicious, phishing</td></tr></tbody>
+  </table>
+</body>
+</html>

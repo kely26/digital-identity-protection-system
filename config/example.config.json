@@ -1,0 +1,70 @@
+{
+  "scan": {
+    "paths": [
+      "~/Documents",
+      "~/Downloads"
+    ],
+    "max_file_size_mb": 3
+  },
+  "modules": {
+    "enabled": [
+      "identity_exposure",
+      "breach_intelligence",
+      "credential_hygiene",
+      "privacy_risk",
+      "browser_audit",
+      "email_phishing",
+      "threat_intelligence",
+      "custom_sensitive_file_scanner",
+      "ai_security_analysis"
+    ]
+  },
+  "credential": {
+    "password_file": "tests/fixtures/exposure/passwords.txt"
+  },
+  "email": {
+    "inputs": [
+      "tests/fixtures/email/phish.eml"
+    ]
+  },
+  "breach_intelligence": {
+    "identifiers": [
+      "security.user@example.com",
+      "security.user"
+    ],
+    "offline_datasets": [
+      "tests/fixtures/breach/offline_dataset.json"
+    ]
+  },
+  "threat_intelligence": {
+    "feed_paths": [
+      "tests/fixtures/threat/malicious_feed.json"
+    ]
+  },
+  "event_timeline": {
+    "max_events": 250,
+    "correlation_window_hours": 24
+  },
+  "ai_security_analysis": {
+    "provider": "local_heuristic",
+    "max_findings": 10,
+    "max_recommendations": 5
+  },
+  "plugin_system": {
+    "enabled_plugins": [
+      "custom_scanner"
+    ],
+    "plugin_configs": {
+      "custom_scanner": {
+        "severity": "high",
+        "external_tool_command": "local-yara --scan"
+      }
+    }
+  },
+  "reporting": {
+    "output_dir": "reports"
+  },
+  "watch": {
+    "interval_seconds": 300
+  }
+}

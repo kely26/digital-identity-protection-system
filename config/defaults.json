@@ -1,0 +1,155 @@
+{
+  "scan": {
+    "paths": [],
+    "max_file_size_mb": 2,
+    "max_files": 5000,
+    "max_workers": 8,
+    "extensions": [
+      ".txt",
+      ".log",
+      ".cfg",
+      ".conf",
+      ".ini",
+      ".json",
+      ".yaml",
+      ".yml",
+      ".xml",
+      ".csv",
+      ".md",
+      ".env",
+      ".bak",
+      ".old",
+      ".sql",
+      ".ps1",
+      ".bat",
+      ".sh",
+      ".eml"
+    ],
+    "exclude_dirs": [
+      ".git",
+      "node_modules",
+      "dist",
+      "build",
+      "target",
+      "__pycache__",
+      ".venv",
+      "venv"
+    ]
+  },
+  "modules": {
+    "enabled": [
+      "identity_exposure",
+      "breach_intelligence",
+      "credential_hygiene",
+      "privacy_risk",
+      "browser_audit",
+      "email_phishing",
+      "threat_intelligence",
+      "ai_security_analysis"
+    ]
+  },
+  "browser": {
+    "max_extension_count": 15
+  },
+  "credential": {
+    "password_file": "",
+    "passwords": []
+  },
+  "email": {
+    "inputs": []
+  },
+  "breach_intelligence": {
+    "identifiers": [],
+    "offline_datasets": [],
+    "allow_external": false,
+    "cache_path": ".cache/dips/breach_cache.json",
+    "cache_ttl_seconds": 86400,
+    "hash_salt": "",
+    "providers": []
+  },
+  "threat_intelligence": {
+    "feed_paths": [],
+    "allow_online": false,
+    "cache_path": ".cache/dips/threat_intel_cache.json",
+    "cache_ttl_seconds": 43200,
+    "max_indicators": 250,
+    "providers": []
+  },
+  "event_timeline": {
+    "store_path": ".cache/dips/event_timeline.json",
+    "max_events": 500,
+    "correlation_window_hours": 24
+  },
+  "ai_security_analysis": {
+    "provider": "local_heuristic",
+    "allow_online": false,
+    "endpoint": "",
+    "api_key_env": "",
+    "model": "local-heuristic-v1",
+    "timeout_seconds": 15,
+    "max_findings": 12,
+    "max_recommendations": 6
+  },
+  "plugin_system": {
+    "search_paths": [
+      "plugins"
+    ],
+    "enabled_plugins": [],
+    "plugin_configs": {},
+    "strict_validation": true
+  },
+  "reporting": {
+    "output_dir": "reports",
+    "formats": [
+      "json",
+      "html"
+    ],
+    "redact_evidence": true
+  },
+  "scoring": {
+    "weights": {
+      "info": 1,
+      "low": 3,
+      "medium": 6,
+      "high": 10,
+      "critical": 15
+    },
+    "module_multipliers": {
+      "identity_exposure": 1.0,
+      "breach_intelligence": 1.15,
+      "credential_hygiene": 1.0,
+      "privacy_risk": 1.0,
+      "browser_audit": 1.0,
+      "email_phishing": 1.0,
+      "threat_intelligence": 1.1
+      ,
+      "ai_security_analysis": 1.0
+    }
+  },
+  "risk_engine": {
+    "enabled": true,
+    "category_weights": {
+      "breach_exposure": 1.2,
+      "password_strength": 1.0,
+      "credential_reuse": 1.0,
+      "browser_risk": 1.0,
+      "phishing_risk": 1.0,
+      "threat_intelligence": 1.1,
+      "analysis_advice": 0.0,
+      "token_exposure": 1.0,
+      "privacy_risk": 1.0
+    },
+    "thresholds": {
+      "minimal": 0,
+      "low": 15,
+      "moderate": 35,
+      "high": 60,
+      "critical": 85
+    },
+    "max_recommendations": 6,
+    "max_finding_titles": 6
+  },
+  "watch": {
+    "interval_seconds": 300
+  }
+}

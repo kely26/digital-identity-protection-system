@@ -1,0 +1,18 @@
+From: "IT Support" <support@example.com>
+Reply-To: attacker@evil.example
+Subject: Urgent action required to verify your mailbox
+Authentication-Results: mx.example; spf=fail smtp.mailfrom=evil.example; dkim=fail header.d=evil.example; dmarc=fail
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+--BOUNDARY
+Content-Type: text/plain; charset="utf-8"
+
+Please verify your account immediately at http://192.168.1.10/login or https://xn--microsft-3ya.example/reset.
+
+--BOUNDARY
+Content-Type: application/octet-stream
+Content-Disposition: attachment; filename="invoice.js"
+
+alert('bad');
+--BOUNDARY--

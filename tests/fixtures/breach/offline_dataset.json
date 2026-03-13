@@ -1,0 +1,30 @@
+[
+  {
+    "identifier_hash": "b7b9c63088f32c1ffff0884484973ab5165c08d17ccd157f2c9130b8cbc71ce7",
+    "source": "breach_archive_2021",
+    "breach_name": "Breach Archive 2021",
+    "compromised_at": "2021-10-10",
+    "type": "credential_dump"
+  },
+  {
+    "identifier_hash": "b7b9c63088f32c1ffff0884484973ab5165c08d17ccd157f2c9130b8cbc71ce7",
+    "source": "forum_dump",
+    "breach_name": "Forum Dump",
+    "compromised_at": "2024-03-02",
+    "type": "forum_credentials"
+  },
+  {
+    "identifier_hash": "b7b9c63088f32c1ffff0884484973ab5165c08d17ccd157f2c9130b8cbc71ce7",
+    "source": "credential_leak",
+    "breach_name": "Credential Leak",
+    "compromised_at": "2025-08-15",
+    "type": "combo_list"
+  },
+  {
+    "identifier_hash": "af2b7465ae7d3f0129661aad0d7fec7587a683f962185b85c1cdd59842c08f54",
+    "source": "credential_leak",
+    "breach_name": "Credential Leak",
+    "compromised_at": "2025-08-15",
+    "type": "username"
+  }
+]

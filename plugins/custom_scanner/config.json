@@ -1,0 +1,13 @@
+{
+  "watch_keywords": [
+    "browser-export",
+    "vault",
+    "session-dump",
+    "password-backup",
+    "remote-access"
+  ],
+  "severity": "medium",
+  "enrich_builtin_findings": true,
+  "external_tool_command": "",
+  "report_title": "Custom Scanner Insights"
+}
