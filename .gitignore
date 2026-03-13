@@ -14,7 +14,7 @@ dist/
 release/
 wheelhouse/
 *.egg-info/
-reports/
+/reports/
 .venv/
 *.log
 *.jsonl

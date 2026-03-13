@@ -1,0 +1,528 @@
+{
+  "scan_id": "sample-identity-incident-001",
+  "started_at": "2026-03-12T18:10:00+00:00",
+  "finished_at": "2026-03-12T18:10:11+00:00",
+  "duration_ms": 11240,
+  "platform_name": "linux",
+  "hostname": "demo-workstation",
+  "username": "demo-operator",
+  "user_profile": "/home/demo-operator",
+  "target_paths": [
+    "~/Workspace",
+    "~/InboxExports",
+    "~/Downloads"
+  ],
+  "notes": [
+    "This is a synthetic example report for documentation and repository previews.",
+    "The findings are realistic in shape but do not reflect any real user environment."
+  ],
+  "config": {
+    "scan": {
+      "paths": [
+        "~/Workspace",
+        "~/InboxExports",
+        "~/Downloads"
+      ],
+      "max_file_size_mb": 3
+    },
+    "modules": {
+      "enabled": [
+        "identity_exposure",
+        "breach_intelligence",
+        "credential_hygiene",
+        "browser_audit",
+        "email_phishing",
+        "threat_intelligence",
+        "ai_security_analysis"
+      ]
+    },
+    "reporting": {
+      "formats": [
+        "json",
+        "html"
+      ],
+      "redact_evidence": true
+    }
+  },
+  "summary": {
+    "overall_score": 86,
+    "overall_label": "high",
+    "risk_model": "digital_identity_weighted_sum",
+    "severity_counts": {
+      "critical": 2,
+      "high": 6,
+      "medium": 4,
+      "low": 1,
+      "info": 0
+    },
+    "module_scores": {
+      "identity_exposure": 34,
+      "breach_intelligence": 24,
+      "credential_hygiene": 20,
+      "privacy_risk": 8,
+      "browser_audit": 18,
+      "email_phishing": 28,
+      "threat_intelligence": 27,
+      "ai_security_analysis": 0
+    },
+    "category_scores": {
+      "token_exposure": 35,
+      "breach_exposure": 31,
+      "phishing_risk": 44,
+      "browser_risk": 18,
+      "credential_reuse": 12,
+      "password_strength": 10,
+      "threat_intelligence": 27,
+      "privacy_risk": 8,
+      "analysis_advice": 0
+    },
+    "contributing_findings": [
+      "threat_intelligence: Threat intelligence match for url",
+      "identity_exposure: GitHub token pattern detected",
+      "breach_intelligence: Identity exposure detected in breach intelligence",
+      "email_phishing: Reply-To mismatch detected in email headers",
+      "browser_audit: Disabled browser protection setting detected"
+    ],
+    "top_recommendations": [
+      "Revoke the exposed token and remove plaintext copies from project notes.",
+      "Force password reset and MFA re-validation for the affected finance mailbox.",
+      "Block the malicious URL and domain in mail and web controls.",
+      "Re-enable browser protections and remove saved credentials from the analyst profile.",
+      "Treat the breach, phishing, and token findings as one correlated identity-security incident."
+    ]
+  },
+  "modules": [
+    {
+      "module": "identity_exposure",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "exposure_findings": 2,
+        "scanned_files": 19
+      },
+      "findings": [
+        {
+          "id": "sample-ie-001",
+          "module": "identity_exposure",
+          "severity": "critical",
+          "confidence": "high",
+          "title": "GitHub token pattern detected",
+          "summary": "A staging integration token appears in a locally synced project notebook.",
+          "evidence": {
+            "file_name": "board-notes.md",
+            "sample": "demo_token_orange"
+          },
+          "location": "~/Workspace/notes/board-notes.md",
+          "recommendation": "Revoke the exposed token and replace it with a managed secret reference.",
+          "tags": [
+            "token",
+            "secret"
+          ]
+        },
+        {
+          "id": "sample-ie-002",
+          "module": "identity_exposure",
+          "severity": "medium",
+          "confidence": "medium",
+          "title": "Plaintext executive contacts detected",
+          "summary": "An export file contains internal leadership contacts in plaintext.",
+          "evidence": {
+            "file_name": "leadership-export.csv"
+          },
+          "location": "~/Workspace/exports/leadership-export.csv",
+          "recommendation": "Move the export to approved storage and remove stale local copies.",
+          "tags": [
+            "identity",
+            "privacy"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "breach_intelligence",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "identifiers_scanned": 3,
+        "identifiers_with_hits": 1,
+        "offline_dataset_count": 2
+      },
+      "findings": [
+        {
+          "id": "sample-bi-001",
+          "module": "breach_intelligence",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Identity exposure detected in breach intelligence",
+          "summary": "finance.ops@example.com appears in staged breach collections with password-reuse risk.",
+          "evidence": {
+            "identifier": "finance.ops@example.com",
+            "identifier_type": "email",
+            "identifier_hash": "sample-e5f6",
+            "breach_count": 3,
+            "sources": [
+              "breach_archive_2024",
+              "credential_leak",
+              "combo-list-sim"
+            ]
+          },
+          "location": "finance.ops@example.com",
+          "recommendation": "Reset the account password, enforce MFA, and review recent sign-in activity.",
+          "tags": [
+            "breach",
+            "identity",
+            "email"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "credential_hygiene",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "password_count": 6,
+        "unique_passwords": 5
+      },
+      "findings": [
+        {
+          "id": "sample-ch-001",
+          "module": "credential_hygiene",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Password reuse detected",
+          "summary": "Two staged business services share the same password candidate.",
+          "evidence": {
+            "accounts": [
+              "payments-portal",
+              "finance-admin"
+            ],
+            "count": 2
+          },
+          "location": "credential_inputs",
+          "recommendation": "Break the reuse and assign unique passwords to each service immediately.",
+          "tags": [
+            "password",
+            "reuse"
+          ]
+        },
+        {
+          "id": "sample-ch-002",
+          "module": "credential_hygiene",
+          "severity": "medium",
+          "confidence": "medium",
+          "title": "Common password detected",
+          "summary": "One password candidate appears in a common-password list.",
+          "evidence": {
+            "password_alias": "finance-admin"
+          },
+          "location": "credential_inputs",
+          "recommendation": "Replace the password with a longer unique passphrase.",
+          "tags": [
+            "password",
+            "common"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "browser_audit",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "profiles": 2,
+        "extensions_seen": 14
+      },
+      "findings": [
+        {
+          "id": "sample-ba-001",
+          "module": "browser_audit",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Disabled browser protection setting detected",
+          "summary": "Safe browsing protections are disabled in the default analyst browser profile.",
+          "evidence": {
+            "browser": "Chrome",
+            "profile": "Default"
+          },
+          "location": "Chrome/Default",
+          "recommendation": "Re-enable browser protections and review the profile for unauthorized changes.",
+          "tags": [
+            "browser",
+            "protection"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "email_phishing",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "emails_scanned": 1
+      },
+      "findings": [
+        {
+          "id": "sample-ep-001",
+          "module": "email_phishing",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Reply-To mismatch detected in email headers",
+          "summary": "A staged executive escalation email redirects replies to an external mailbox.",
+          "evidence": {
+            "from": "leadership@trusted-announcements.example",
+            "reply_to": "escalation@secure-mailhub.example"
+          },
+          "location": "wire-review.eml",
+          "recommendation": "Quarantine the message and warn the target team not to reply.",
+          "tags": [
+            "email",
+            "phishing",
+            "header"
+          ]
+        },
+        {
+          "id": "sample-ep-002",
+          "module": "email_phishing",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Email authentication failure detected",
+          "summary": "The staged message fails SPF, DKIM, and DMARC checks.",
+          "evidence": {
+            "spf": "fail",
+            "dkim": "fail",
+            "dmarc": "fail"
+          },
+          "location": "wire-review.eml",
+          "recommendation": "Block the sender infrastructure and review mail security controls.",
+          "tags": [
+            "email",
+            "phishing",
+            "auth"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "threat_intelligence",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "indicators_scanned": 4,
+        "indicators_enriched": 2
+      },
+      "findings": [
+        {
+          "id": "sample-ti-001",
+          "module": "threat_intelligence",
+          "severity": "critical",
+          "confidence": "high",
+          "title": "Threat intelligence match for url",
+          "summary": "The executive review URL is tagged malicious by multiple staged threat feeds.",
+          "evidence": {
+            "indicator": "https://executive-wire-review.example/approve",
+            "indicator_type": "url",
+            "reputation": "malicious",
+            "confidence": 0.96,
+            "sources": [
+              "ioc_database",
+              "phish-tracker",
+              "threat_feed_1"
+            ]
+          },
+          "location": "wire-review.eml",
+          "recommendation": "Block the URL immediately and investigate any related user interaction.",
+          "tags": [
+            "threat-intel",
+            "url",
+            "malicious",
+            "phishing"
+          ]
+        },
+        {
+          "id": "sample-ti-002",
+          "module": "threat_intelligence",
+          "severity": "high",
+          "confidence": "high",
+          "title": "Threat intelligence match for domain",
+          "summary": "The impersonation domain is linked to prior business-email compromise campaigns.",
+          "evidence": {
+            "indicator": "executive-wire-review.example",
+            "indicator_type": "domain",
+            "reputation": "malicious",
+            "confidence": 0.91,
+            "sources": [
+              "ioc_database",
+              "brand-monitor-feed"
+            ]
+          },
+          "location": "wire-review.eml",
+          "recommendation": "Block the domain in mail and web controls.",
+          "tags": [
+            "threat-intel",
+            "domain",
+            "malicious",
+            "phishing"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ai_security_analysis",
+      "status": "completed",
+      "warnings": [],
+      "metadata": {
+        "analysis_mode": "synthetic-example",
+        "findings_reviewed": 9,
+        "summary": "The synthetic incident combines breach exposure, reusable credentials, and malicious phishing infrastructure into one coordinated identity-risk scenario.",
+        "risk_explanation": "The risk score is elevated because the same incident touches identities, secrets, browser defenses, and delivery infrastructure at the same time.",
+        "recommended_actions": [
+          "Rotate exposed tokens and reused credentials.",
+          "Quarantine the phishing message and block its infrastructure.",
+          "Re-enable browser protections and remove saved credentials."
+        ]
+      },
+      "findings": [
+        {
+          "id": "sample-ai-001",
+          "module": "ai_security_analysis",
+          "severity": "high",
+          "confidence": "medium",
+          "title": "Correlated identity incident detected",
+          "summary": "Breach, phishing, and token exposure findings align into a single staged identity-security incident.",
+          "evidence": {
+            "scenario": "synthetic-example"
+          },
+          "location": "cross-module-analysis",
+          "recommendation": "Treat the findings as one containment event instead of isolated tasks.",
+          "tags": [
+            "ai-analysis",
+            "correlation"
+          ]
+        }
+      ]
+    }
+  ],
+  "timeline": {
+    "total_events": 5,
+    "events": [
+      {
+        "id": "sample-t1",
+        "timestamp": "2026-03-12T18:11:00+00:00",
+        "event_type": "credential_reuse",
+        "severity": "high",
+        "title": "Password reuse detected",
+        "summary": "Two staged business services share a password candidate.",
+        "module": "credential_hygiene",
+        "location": "credential_inputs",
+        "scan_id": "sample-identity-incident-001",
+        "tags": [
+          "reuse"
+        ],
+        "correlations": [
+          "Credential reuse plus breach exposure"
+        ]
+      },
+      {
+        "id": "sample-t2",
+        "timestamp": "2026-03-12T18:12:00+00:00",
+        "event_type": "breach_exposure",
+        "severity": "high",
+        "title": "Identity exposure detected in breach intelligence",
+        "summary": "The finance mailbox appears in multiple staged breach datasets.",
+        "module": "breach_intelligence",
+        "location": "finance.ops@example.com",
+        "scan_id": "sample-identity-incident-001",
+        "tags": [
+          "breach"
+        ],
+        "correlations": [
+          "Credential reuse plus breach exposure"
+        ]
+      },
+      {
+        "id": "sample-t3",
+        "timestamp": "2026-03-12T18:14:00+00:00",
+        "event_type": "phishing_analysis",
+        "severity": "high",
+        "title": "Reply-To mismatch detected in email headers",
+        "summary": "The executive lure redirects replies off-domain.",
+        "module": "email_phishing",
+        "location": "wire-review.eml",
+        "scan_id": "sample-identity-incident-001",
+        "tags": [
+          "phishing"
+        ],
+        "correlations": [
+          "Phishing with malicious infrastructure"
+        ]
+      },
+      {
+        "id": "sample-t4",
+        "timestamp": "2026-03-12T18:15:00+00:00",
+        "event_type": "threat_intel_match",
+        "severity": "critical",
+        "title": "Threat intelligence match for url",
+        "summary": "The staged URL is tagged malicious by multiple threat feeds.",
+        "module": "threat_intelligence",
+        "location": "wire-review.eml",
+        "scan_id": "sample-identity-incident-001",
+        "tags": [
+          "threat-intel",
+          "phishing"
+        ],
+        "correlations": [
+          "Phishing with malicious infrastructure"
+        ]
+      },
+      {
+        "id": "sample-t5",
+        "timestamp": "2026-03-12T18:16:00+00:00",
+        "event_type": "secret_exposure",
+        "severity": "critical",
+        "title": "GitHub token pattern detected",
+        "summary": "A token remains present in a locally synced notebook.",
+        "module": "identity_exposure",
+        "location": "~/Workspace/notes/board-notes.md",
+        "scan_id": "sample-identity-incident-001",
+        "tags": [
+          "secret"
+        ],
+        "correlations": [
+          "Exposed token with phishing-ready environment"
+        ]
+      }
+    ],
+    "patterns": [
+      {
+        "id": "sample-p1",
+        "name": "Credential reuse plus breach exposure",
+        "severity": "high",
+        "summary": "The same identity cluster appears in breach data while critical services still reuse passwords.",
+        "modules": [
+          "credential_hygiene",
+          "breach_intelligence"
+        ],
+        "event_ids": [
+          "sample-t1",
+          "sample-t2"
+        ]
+      },
+      {
+        "id": "sample-p2",
+        "name": "Phishing with malicious infrastructure",
+        "severity": "critical",
+        "summary": "The executive-style phishing message overlaps with malicious URL intelligence and failed email authentication.",
+        "modules": [
+          "email_phishing",
+          "threat_intelligence"
+        ],
+        "event_ids": [
+          "sample-t3",
+          "sample-t4"
+        ]
+      }
+    ]
+  },
+  "extensions": []
+}

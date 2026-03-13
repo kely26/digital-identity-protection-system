@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DIPS Example Report | sample-identity-incident-001</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0b1020; color: #e5e7eb; margin: 0; padding: 24px; }
+    h1, h2, h3 { margin: 0 0 12px; }
+    p { line-height: 1.5; }
+    .muted { color: #9ca3af; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0 24px; }
+    .card { background: #131a2d; border: 1px solid #22304e; border-radius: 12px; padding: 16px; }
+    .score { font-size: 42px; font-weight: 700; }
+    .pill { border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: bold; display: inline-block; }
+    .sev-medium { background: #854d0e; }
+    .sev-high { background: #9a3412; }
+    .sev-critical { background: #991b1b; }
+    table { width: 100%; border-collapse: collapse; background: #131a2d; border-radius: 12px; overflow: hidden; }
+    th, td { border-bottom: 1px solid #22304e; text-align: left; padding: 12px; vertical-align: top; }
+    th { background: #172036; }
+    ul { padding-left: 20px; }
+    code { color: #7dd3fc; }
+  </style>
+</head>
+<body>
+  <h1>Digital Identity Protection System</h1>
+  <p class="muted">Example synthetic report · Scan ID <code>sample-identity-incident-001</code> · Platform linux · User demo-operator</p>
+  <p>This example report is intentionally synthetic. It is designed to show what a realistic DIPS incident report looks like without exposing any real local data.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Overall Score</h3>
+      <div class="score">86</div>
+      <p><span class="pill sev-high">HIGH</span></p>
+    </div>
+    <div class="card">
+      <h3>Risk Model</h3>
+      <p>digital_identity_weighted_sum</p>
+      <h3>Duration</h3>
+      <p>11240 ms</p>
+    </div>
+    <div class="card">
+      <h3>Started</h3>
+      <p>2026-03-12T18:10:00+00:00</p>
+      <h3>Finished</h3>
+      <p>2026-03-12T18:10:11+00:00</p>
+    </div>
+    <div class="card">
+      <h3>Target Paths</h3>
+      <ul>
+        <li>~/Workspace</li>
+        <li>~/InboxExports</li>
+        <li>~/Downloads</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Severity Distribution</h2>
+  <table>
+    <thead>
+      <tr><th>Severity</th><th>Count</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Critical</td><td>2</td></tr>
+      <tr><td>High</td><td>6</td></tr>
+      <tr><td>Medium</td><td>4</td></tr>
+      <tr><td>Low</td><td>1</td></tr>
+      <tr><td>Info</td><td>0</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Category Scores</h2>
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Score</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Phishing risk</td><td>44</td></tr>
+      <tr><td>Token exposure</td><td>35</td></tr>
+      <tr><td>Breach exposure</td><td>31</td></tr>
+      <tr><td>Threat intelligence</td><td>27</td></tr>
+      <tr><td>Browser risk</td><td>18</td></tr>
+      <tr><td>Credential reuse</td><td>12</td></tr>
+      <tr><td>Password strength</td><td>10</td></tr>
+      <tr><td>Privacy risk</td><td>8</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Top Recommendations</h2>
+  <div class="card">
+    <ul>
+      <li>Revoke the exposed token and remove plaintext copies from project notes.</li>
+      <li>Force password reset and MFA re-validation for the affected finance mailbox.</li>
+      <li>Block the malicious URL and domain in mail and web controls.</li>
+      <li>Re-enable browser protections and remove saved credentials from the analyst profile.</li>
+      <li>Treat the breach, phishing, and token findings as one correlated identity-security incident.</li>
+    </ul>
+  </div>
+
+  <h2>Alert Findings</h2>
+  <table>
+    <thead>
+      <tr><th>Severity</th><th>Module</th><th>Finding</th><th>Location</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="pill sev-critical">CRITICAL</span></td><td>threat_intelligence</td><td>Threat intelligence match for url</td><td>wire-review.eml</td></tr>
+      <tr><td><span class="pill sev-critical">CRITICAL</span></td><td>identity_exposure</td><td>GitHub token pattern detected</td><td>~/Workspace/notes/board-notes.md</td></tr>
+      <tr><td><span class="pill sev-high">HIGH</span></td><td>breach_intelligence</td><td>Identity exposure detected in breach intelligence</td><td>finance.ops@example.com</td></tr>
+      <tr><td><span class="pill sev-high">HIGH</span></td><td>email_phishing</td><td>Reply-To mismatch detected in email headers</td><td>wire-review.eml</td></tr>
+      <tr><td><span class="pill sev-high">HIGH</span></td><td>browser_audit</td><td>Disabled browser protection setting detected</td><td>Chrome/Default</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Timeline And Correlation</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Security Timeline</h3>
+      <ul>
+        <li>18:11 · Password reuse detected</li>
+        <li>18:12 · Breach exposure detected for finance identity</li>
+        <li>18:14 · Phishing header mismatch detected</li>
+        <li>18:15 · Malicious URL reputation match</li>
+        <li>18:16 · GitHub token pattern detected</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Correlated Patterns</h3>
+      <ul>
+        <li><strong>Credential reuse plus breach exposure</strong>: the identity cluster appears in breach data while service passwords remain reused.</li>
+        <li><strong>Phishing with malicious infrastructure</strong>: the staged executive message overlaps with malicious URL intelligence and failed email authentication.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>AI Security Analysis</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Summary</h3>
+      <p>The synthetic incident combines breach exposure, reusable credentials, and malicious phishing infrastructure into one coordinated identity-risk scenario.</p>
+    </div>
+    <div class="card">
+      <h3>Risk Explanation</h3>
+      <p>The score is elevated because the same incident touches identities, secrets, browser defenses, and delivery infrastructure at the same time.</p>
+    </div>
+    <div class="card">
+      <h3>Recommended Actions</h3>
+      <ul>
+        <li>Rotate exposed tokens and reused credentials.</li>
+        <li>Quarantine the phishing message and block its infrastructure.</li>
+        <li>Re-enable browser protections and remove saved credentials.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

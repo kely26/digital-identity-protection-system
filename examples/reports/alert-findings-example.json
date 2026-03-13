@@ -1,0 +1,47 @@
+[
+  {
+    "priority": "P1",
+    "module": "threat_intelligence",
+    "severity": "critical",
+    "title": "Threat intelligence match for url",
+    "location": "wire-review.eml",
+    "summary": "The executive review URL is tagged malicious by multiple staged threat feeds.",
+    "recommendation": "Block the URL immediately and investigate any related user interaction."
+  },
+  {
+    "priority": "P1",
+    "module": "identity_exposure",
+    "severity": "critical",
+    "title": "GitHub token pattern detected",
+    "location": "~/Workspace/notes/board-notes.md",
+    "summary": "A staging integration token appears in a locally synced project notebook.",
+    "recommendation": "Revoke the exposed token and replace it with a managed secret reference."
+  },
+  {
+    "priority": "P2",
+    "module": "breach_intelligence",
+    "severity": "high",
+    "title": "Identity exposure detected in breach intelligence",
+    "location": "finance.ops@example.com",
+    "summary": "finance.ops@example.com appears in staged breach collections with password-reuse risk.",
+    "recommendation": "Reset the account password, enforce MFA, and review recent sign-in activity."
+  },
+  {
+    "priority": "P2",
+    "module": "email_phishing",
+    "severity": "high",
+    "title": "Reply-To mismatch detected in email headers",
+    "location": "wire-review.eml",
+    "summary": "A staged executive escalation email redirects replies to an external mailbox.",
+    "recommendation": "Quarantine the message and warn the target team not to reply."
+  },
+  {
+    "priority": "P2",
+    "module": "browser_audit",
+    "severity": "high",
+    "title": "Disabled browser protection setting detected",
+    "location": "Chrome/Default",
+    "summary": "Safe browsing protections are disabled in the default analyst browser profile.",
+    "recommendation": "Re-enable browser protections and review the profile for unauthorized changes."
+  }
+]
