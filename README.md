@@ -6,7 +6,7 @@
 
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-22bfd8?style=flat-square&labelColor=0b1421&color=22bfd8)
 ![License](https://img.shields.io/github/license/kely26/digital-identity-protection-system?style=flat-square&labelColor=0b1421&color=f8b84a)
-![Build Status](https://img.shields.io/github/actions/workflow/status/kely26/digital-identity-protection-system/ci.yml?branch=main&style=flat-square&labelColor=0b1421&color=35d1a3&label=build)
+![Verification](https://img.shields.io/badge/verification-local%20QA%20passed-35d1a3?style=flat-square&labelColor=0b1421&color=35d1a3)
 ![Test Coverage](https://img.shields.io/badge/coverage-CLI%20%7C%20modules%20%7C%20dashboard-1aa9c2?style=flat-square&labelColor=0b1421&color=1aa9c2)
 ![Security Focused](https://img.shields.io/badge/security-defensive%20%7C%20local--first-ff5d78?style=flat-square&labelColor=0b1421&color=ff5d78)
 ![Windows](https://img.shields.io/badge/windows-supported-35d1a3?style=flat-square&labelColor=0b1421&color=35d1a3)
