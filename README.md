@@ -18,6 +18,7 @@
 
 <p align="center">
   <a href="#quick-start"><strong>Quick Start</strong></a> ·
+  <a href="#downloads"><strong>Downloads</strong></a> ·
   <a href="https://github.com/kely26/digital-identity-protection-system/releases/latest"><strong>Latest Release</strong></a> ·
   <a href="examples/reports"><strong>Example Reports</strong></a> ·
   <a href="#showcase-reel"><strong>Showcase Reel</strong></a> ·
@@ -177,6 +178,20 @@ pip install -e .[gui]
 Full installation guidance is in [docs/installation.md](docs/installation.md).
 
 Packaged release notes and downloadable assets live at [Latest release](https://github.com/kely26/digital-identity-protection-system/releases/latest).
+
+## Downloads
+
+The repository now includes a direct download folder in [downloads](downloads):
+
+- full PDF user guide
+- Debian `.deb` installer
+- checksums for shipped artifacts
+
+If you install the Debian package, validate the environment with:
+
+```bash
+dips doctor
+```
 
 ## Quick Start
 

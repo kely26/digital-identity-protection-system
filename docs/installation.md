@@ -38,6 +38,14 @@ dips --help
 dips dashboard --help
 ```
 
+Debian package shortcut:
+
+```bash
+sudo dpkg -i downloads/dips_0.1.1_all.deb
+dips doctor
+sudo dips-enable-gui   # Optional, enables the desktop dashboard
+```
+
 ## Windows Installation
 
 ```powershell

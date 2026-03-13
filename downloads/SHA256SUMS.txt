@@ -1,0 +1,2 @@
+fa4d57fc2b98f324c49190ecec73094e071021e295e577161b86f3058488a208  downloads/DIPS_User_Guide_v0.1.1.pdf
+4319bdeebc9805140403affab164c64d7d6192afe82671f38555d0076ada375a  downloads/dips_0.1.1_all.deb

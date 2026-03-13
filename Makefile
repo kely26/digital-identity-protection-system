@@ -1,4 +1,4 @@
-.PHONY: clean test lint build release-check smoke dashboard doctor
+.PHONY: clean test lint build release-check smoke dashboard doctor guide-pdf deb-package downloads
 
 clean:
 	rm -rf build dist *.egg-info
@@ -23,3 +23,12 @@ dashboard:
 
 doctor:
 	python3 -m dips doctor
+
+guide-pdf:
+	./.venv/bin/python scripts/build_user_guide_pdf.py
+
+deb-package:
+	./.venv/bin/python scripts/build_deb.py
+
+downloads: guide-pdf deb-package
+	sha256sum downloads/DIPS_User_Guide_v0.1.1.pdf downloads/dips_0.1.1_all.deb > downloads/SHA256SUMS.txt
