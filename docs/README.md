@@ -7,6 +7,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 - [quickstart.md](quickstart.md): the fastest way to run DIPS locally
 - [installation.md](installation.md): Linux and Windows installation
 - [security-philosophy.md](security-philosophy.md): the design principles behind the project’s local-first and defensive-security stance
+- [development-phases.md](development-phases.md): step-by-step breakdown of how the system was built across major phases
 - [project-profile.md](project-profile.md): recruiter-ready, GitHub-ready, resume-ready project copy
 
 ## Operator Guides
@@ -27,6 +28,7 @@ This directory contains the operator, developer, and architecture guides for DIP
 
 ## Engineering Guides
 
+- [development-phases.md](development-phases.md): phase-by-phase build story for presentations, reviews, and portfolio walkthroughs
 - [architecture.md](architecture.md): runtime design, data flow, repository structure, and major components
 - [architecture-diagram.mmd](architecture-diagram.mmd): Mermaid source for the system architecture diagram used in the README and docs
 - [features.md](features.md): module-by-module feature breakdown and operational intent

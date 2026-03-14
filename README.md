@@ -99,6 +99,20 @@ Recommended beta workflow:
 - Portfolio-quality desktop UX with demo mode, screenshot-ready states, and SOC-style telemetry panels.
 - Contributor-friendly repo surface with focused docs, examples, templates, changelog structure, and release guidance.
 
+## Build Journey
+
+If you want to understand how DIPS was built step by step, see [docs/development-phases.md](docs/development-phases.md).
+
+![DIPS development phases](docs/diagrams/development-phases-diagram.png)
+
+It breaks the project into five practical phases:
+
+- foundation and defensive scope
+- core scanning capabilities
+- intelligence and risk correlation
+- reporting and analyst experience
+- product hardening and beta operations
+
 ## Showcase Reel
 
 ![DIPS showcase reel](screenshots/dips-showcase.gif)
@@ -487,6 +501,7 @@ Documentation index: [docs/README.md](docs/README.md)
 ## Documentation At A Glance
 
 - Start here: [docs/quickstart.md](docs/quickstart.md)
+- Project build journey: [docs/development-phases.md](docs/development-phases.md)
 - CLI reference: [docs/cli.md](docs/cli.md)
 - Dashboard guide: [docs/gui.md](docs/gui.md)
 - Feature breakdown: [docs/features.md](docs/features.md)
@@ -520,6 +535,7 @@ Release packaging guidance is in [docs/releasing.md](docs/releasing.md).
 
 - [docs/installation.md](docs/installation.md)
 - [docs/quickstart.md](docs/quickstart.md)
+- [docs/development-phases.md](docs/development-phases.md)
 - [docs/features.md](docs/features.md)
 - [docs/architecture.md](docs/architecture.md)
 - [docs/cli.md](docs/cli.md)
